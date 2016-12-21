@@ -5,11 +5,6 @@ import csv
 import time
 import codecs
 
-app_id = ""
-app_secret = "" # DO NOT SHARE WITH ANYONE!
-page_id = "190786362122"
-
-access_token = app_id + "|" + app_secret
 
 def request_until_succeed(url):
     req = urllib.request.Request(url)
@@ -39,7 +34,7 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses):
     # Construct the URL string; see http://stackoverflow.com/a/37239851 for
     # Reactions parameters
     base = "https://graph.facebook.com/v2.6"
-    node = "/%s/posts" % page_id 
+    node = "/%s/feed" % page_id
     fields = "/?fields=message,link,created_time,type,name,id," + \
             "comments.limit(0).summary(true),shares,reactions" + \
             ".limit(0).summary(true)"
@@ -185,8 +180,5 @@ def scrapeFacebookPageFeedStatus(page_id, access_token):
         print("\nDone!\n%s Statuses Processed in %s" % \
             (num_processed, datetime.datetime.now() - scrape_starttime))
 
-
-if __name__ == '__main__':
-    scrapeFacebookPageFeedStatus(page_id, access_token)
 
 
