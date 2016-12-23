@@ -29,17 +29,18 @@ def unicode_normalize(text):
     return text.translate({ 0x2018:0x27, 0x2019:0x27, 0x201C:0x22, 0x201D:0x22,
                             0xa0:0x20 })
 
-def getFacebookPageFeedData(page_id, access_token, num_statuses):
+def getFacebookPageFeedData(page_id, access_token, num_statuses,tStamp):
 
     # Construct the URL string; see http://stackoverflow.com/a/37239851 for
     # Reactions parameters
     base = "https://graph.facebook.com/v2.6"
     node = "/%s/feed" % page_id
-    fields = "/?fields=message,link,created_time,type,name,id," + \
+    fields = "/?" + "fields=message,link,created_time,type,name,id," + \
             "comments.limit(0).summary(true),shares,reactions" + \
             ".limit(0).summary(true)"
-    parameters = "&limit=%s&access_token=%s" % (num_statuses, access_token)
+    parameters =  "&limit=%s&since=%s&access_token=%s" % (num_statuses, tStamp, access_token)
     url = base + node + fields + parameters
+
 
     # retrieve data
     data = json.loads(request_until_succeed(url))
@@ -138,7 +139,7 @@ def processFacebookPageFeedStatus(status, access_token):
             status_published, num_reactions, num_comments, num_shares,
             num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
-def scrapeFacebookPageFeedStatus(page_id, access_token):
+def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
     with open('%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",
@@ -152,7 +153,7 @@ def scrapeFacebookPageFeedStatus(page_id, access_token):
 
         print("Scraping %s Facebook Page: %s\n" % (page_id, scrape_starttime))
 
-        statuses = getFacebookPageFeedData(page_id, access_token, 100)
+        statuses = getFacebookPageFeedData(page_id, access_token, 100, tStamp)
 
         while has_next_page:
             for status in statuses['data']:

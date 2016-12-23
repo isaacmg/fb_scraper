@@ -47,3 +47,5 @@ Temporary Items
 .apdisk
 app.txt
 *.csv
+.shelve
+save_times
