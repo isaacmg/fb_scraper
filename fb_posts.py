@@ -163,6 +163,7 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
                     w.writerow(processFacebookPageFeedStatus(status,
                         access_token))
 
+
                 # output progress occasionally to make sure code is not
                 # stalling
                 num_processed += 1

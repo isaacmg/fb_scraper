@@ -49,3 +49,9 @@ app.txt
 *.csv
 .shelve
 save_times
+*.ipynb_checkpoints
+*.bak
+*.dir 
+*.pyc
+Untitled.ipynb
+Untitled1.pynb
