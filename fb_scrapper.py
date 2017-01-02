@@ -24,6 +24,6 @@ def scrape(page_id,tstamp):
     d[page_id] = timestamp
 
 
-group_id = "115285708497149"
-scrape(group_id, 0)
+#group_id = "115285708497149"
+#scrape(group_id, 0)
 
