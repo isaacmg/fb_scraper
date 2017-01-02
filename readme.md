@@ -1,2 +1,2 @@
 # Facebook scraper and processer
-Goal of this project is to extract data from FB Posts (on pages and in groups) and then send it to Spark for analysis by NLP alogrithms and then indexing in Elastic Search. 
+Goal of this project is to extract data from FB Posts (on pages and in groups) and then send it to Spark for analysis by NLP algorithms and then indexing in Elastic Search. 
