@@ -4,13 +4,17 @@ import datetime
 import csv
 import time
 import codecs
+from kafka import KafkaProducer
+producer = KafkaProducer(bootstrap_servers='localhost:9092')
+producer.send('test', b'another_message').get(timeout=60)
 
+#producer.send('foober',"some message")
 
 def request_until_succeed(url):
     req = urllib.request.Request(url)
     success = False
     while success is False:
-        try: 
+        try:
             response = urllib.request.urlopen(req)
             if response.getcode() == 200:
                 success = True
@@ -70,7 +74,7 @@ def getReactionsForStatus(status_id, access_token):
     return data
 
 
-def processFacebookPageFeedStatus2(status, access_token):
+def processFacebookPageFeedStatus(status, access_token):
 
     # The status is now a Python dictionary, so for top-level items,
     # we can simply call the key.
@@ -139,12 +143,12 @@ def processFacebookPageFeedStatus2(status, access_token):
             status_published, num_reactions, num_comments, num_shares,
             num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
-def scrapeFacebookPageFeedStatus2(page_id, access_token, tStamp):
+def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
     with open('%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",
-                    "status_link", "status_published", "num_reactions", 
-                    "num_comments", "num_shares", "num_likes", "num_loves", 
+                    "status_link", "status_published", "num_reactions",
+                    "num_comments", "num_shares", "num_likes", "num_loves",
                     "num_wows", "num_hahas", "num_sads", "num_angrys"])
 
         has_next_page = True
@@ -160,7 +164,19 @@ def scrapeFacebookPageFeedStatus2(page_id, access_token, tStamp):
 
                 # Ensure it is a status with the expected metadata
                 if 'reactions' in status:
-                    w.writerow(processFacebookPageFeedStatus2(status,
+                    s = processFacebookPageFeedStatus(status,
+                        access_token)
+                    a = ""
+                    for element in s:
+                        a += "," + str(element)
+                    print(a)
+
+                    byew = a.encode()
+                    producer.send('test2', key=b'foo', value=byew)
+                    #producer.send('test', key=b'foo', value=a)
+
+
+                    w.writerow(processFacebookPageFeedStatus(status,
                         access_token))
 
 
