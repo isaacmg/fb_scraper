@@ -70,7 +70,7 @@ def getReactionsForStatus(status_id, access_token):
     return data
 
 
-def processFacebookPageFeedStatus2(status, access_token):
+def processFacebookPageFeedStatus(status, access_token):
 
     # The status is now a Python dictionary, so for top-level items,
     # we can simply call the key.

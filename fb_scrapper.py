@@ -5,6 +5,10 @@ import time
 #import fb_pages
 # Function to scrape with.
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
+# To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
+def scrape_pages(page_id, from_time, function_number):
+    funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2]
+    scrape(page_id, from_time, funcs[function_number] )
 
 def scrape(page_id,tstamp,scrape_func):
     with open('app.txt', 'r') as f:
