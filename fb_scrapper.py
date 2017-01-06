@@ -18,14 +18,21 @@ def scrape(page_id,tstamp,scrape_func):
     app_id = "238791666290359"
     app_secret = second_line
     access_token = app_id + "|" + app_secret
-    # To do check if dict has key before calling
+
     if tstamp is 1:
         d = shelve.open('save_times')
-        time_opened = d[page_id]
-        pageStamp = str(time_opened)
-
-        scrape_func(page_id, access_token, pageStamp)
-    scrape_func(page_id, access_token,-2180131200)
+        if page_id in d:
+            time_opened = d[page_id]
+            pageStamp = str(time_opened)
+            scrape_func(page_id, access_token, pageStamp)
+        else:
+            print("key not found in dict proceeding with full scrape")
+            pageStamp = -2180131200
+    elif tstamp is 0:
+        pageStamp = -2180131200
+    else:
+        pageStamp=tstamp
+    scrape_func(page_id, access_token, pageStamp)
     timestamp = int(time.time())
     d = shelve.open('save_times')
     d[page_id] = timestamp
