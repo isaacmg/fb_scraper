@@ -172,6 +172,8 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
                     print(a)
 
                     byew = a.encode()
+                    # To do serialize data properly in Avro berfore sending
+                    # Also make the key be the name of the facebook group for easy tracking
                     producer.send('test2', key=b'foo', value=byew)
                     #producer.send('test', key=b'foo', value=a)
 
