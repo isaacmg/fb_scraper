@@ -5,10 +5,43 @@ import csv
 import time
 import codecs
 from kafka import KafkaProducer
+from avro import schema, datafile, io
+import io as io2
+
 producer = KafkaProducer(bootstrap_servers='localhost:9092')
 producer.send('test', b'another_message').get(timeout=60)
 
 #producer.send('foober',"some message")
+def serialize(items):
+    SCHEMA = schema.Parse(json.dumps({
+        "namespace": "example.avro",
+        "type": "record",
+        "name": "facebookPost",
+        "fields": [
+            {"name": "status_id", "type": "string"},
+            {"name": "status_message", "type": "string"},
+            {"name": "link_name", "type": "string"},
+            {"name": "status_type", "type": "string"},
+            {"name": "status_link", "type": "string"},
+            {"name": "status_published", "type": "string"}, #Maybe use time type in future?
+            {"name": "num_reactions", "type": "int"},
+            {"name": "num_comments", "type": "int"},
+            {"name": "num_shares", "type": "int"},
+            {"name": "num_likes", "type": "int"},
+            {"name": "num_loves", "type": "int"}
+        ]
+    }))
+    writer = io.DatumWriter(SCHEMA)
+    bytes_writer = io2.BytesIO()
+    encoder = io.BinaryEncoder(bytes_writer)
+    # There must be a better way of writing this item that isn't so long
+    print(items[1])
+    writer.write({"status_id": items[0], "status_message": items[1], "link_name": items[2], "status_type": items[3],"status_link": items[4], "status_published":items[5], "num_reactions": items[6], "num_comments": items[7], "num_shares":items[8], "num_likes":items[9], "num_loves":items[10] }, encoder)
+    raw_bytes = bytes_writer.getvalue()
+    return raw_bytes
+
+
+
 
 def request_until_succeed(url):
     req = urllib.request.Request(url)
@@ -166,15 +199,17 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
                 if 'reactions' in status:
                     s = processFacebookPageFeedStatus(status,
                         access_token)
+                    print(s)
                     a = ""
                     for element in s:
                         a += "," + str(element)
                     print(a)
 
+
                     byew = a.encode()
 
                     # To do serialize data properly in Avro berfore sending
-                    # Also make the key be the name of the facebook group for easy tracking
+                    # Also make the key be the name of the facebook group for easy trackingcom
                     producer.send('test2', key=b'foo', value=byew)
                     #producer.send('test', key=b'foo', value=a)
 
@@ -200,6 +235,7 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
 
         print("\nDone!\n%s Statuses Processed in %s" % \
             (num_processed, datetime.datetime.now() - scrape_starttime))
+
 
 
 
