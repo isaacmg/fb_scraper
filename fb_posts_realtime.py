@@ -12,6 +12,12 @@ producer = KafkaProducer(bootstrap_servers='localhost:9092')
 producer.send('test', b'another_message').get(timeout=60)
 
 #producer.send('foober',"some message")
+def get_as_json(items):
+    message= {"status_id": items[0], "status_message": items[1], "link_name": items[2], "status_type": items[3],
+     "status_link": items[4], "status_published": items[5], "num_reactions": items[6], "num_comments": items[7],
+     "num_shares": items[8], "num_likes": items[9], "num_loves": items[10]}
+    print(message)
+    return message
 def serialize(items):
     SCHEMA = schema.Parse(json.dumps({
         "namespace": "example.avro",
@@ -35,9 +41,9 @@ def serialize(items):
     bytes_writer = io2.BytesIO()
     encoder = io.BinaryEncoder(bytes_writer)
     # There must be a better way of writing this item that isn't so long
-    print(items[1])
-    writer.write({"status_id": items[0], "status_message": items[1], "link_name": items[2], "status_type": items[3],"status_link": items[4], "status_published":items[5], "num_reactions": items[6], "num_comments": items[7], "num_shares":items[8], "num_likes":items[9], "num_loves":items[10] }, encoder)
+    writer.write(get_as_json(items), encoder)
     raw_bytes = bytes_writer.getvalue()
+
     return raw_bytes
 
 
@@ -200,17 +206,15 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
                     s = processFacebookPageFeedStatus(status,
                         access_token)
                     print(s)
-                    a = ""
-                    for element in s:
-                        a += "," + str(element)
-                    print(a)
 
 
-                    byew = a.encode()
+
+                    byew = serialize(s)
+
 
                     # To do serialize data properly in Avro berfore sending
                     # Also make the key be the name of the facebook group for easy trackingcom
-                    producer.send('test2', key=b'foo', value=byew)
+                    producer.send('fb', key=b'foo', value=byew)
                     #producer.send('test', key=b'foo', value=a)
 
 
