@@ -5,7 +5,7 @@ The goal of this project is to extract data from FB Posts (on pages and in group
 1. Create a file called app.txt and place your app_id in it along with your app_secret.
 2. Use fb_scrapper.py to pull data from a FB Group. You can either do this from whithin in it or by calling from your notebook (if you do choose this this way be sure to delete by test call at the bottom). To do this specify a group_id. Call scrape(group_id,0,func). The 0 parameter signifies your want to do a full scrape and not use the shelved file from the last scrape 
 Example:
-```
+```python
 from fb_scrapper import scrape_pages
 group_id = "115285708497149"
 full_scrape = 0
