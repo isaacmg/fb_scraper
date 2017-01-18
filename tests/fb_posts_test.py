@@ -18,7 +18,7 @@ class MyTest(unittest.TestCase):
         testList = ('115285708497149_1731636350195402', 'One-day special session, Northampton, MA YMCA.', 'Northampton Pool Rolling Session', 'event', 'https://www.facebook.com/events/319137738480268/', '2017-01-09 18:51:17', 1, 0, 0, 1, 0, 0, 0, 0, 0)
         s = serialize(testList)
         self.assertEqual(get_as_json(testList), deserialize(s))
-
+    #Fix timeout errors
     def kafka_producer(self):
         print('this is text')
         a = ProducerObject()
@@ -28,7 +28,7 @@ class MyTest(unittest.TestCase):
         producer.send('foobar', message)
         producer.flush()
 
-        #return_message = consumer()
+        return_message = consumer()
         self.assertEqual(message,return_message)
 
 
