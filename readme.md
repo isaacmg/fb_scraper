@@ -15,4 +15,4 @@ scrape_pages(group_id,full_scrape,scraper_type)
 3. If you choose the first function (i.e 0) it will attempt to use Kafka to message scraping results in realtime AND write to the CSV. If you do not have Kafka use 1 instead and it will just generate the CSV.
 4. Currently the bulk of the processing is being done from the Examining data using Spark.ipynb notebook. You can open the notebook and specify the name of your CSV (we are working on automating this).
 5. Run through the notebook and make any changes/additions you want. We are currently working on adding an additional notebook which will include the use of Kafka and Spark streaming, however this is still very raw.
-##### Scrape away!
+### Scrape away!
