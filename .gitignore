@@ -55,3 +55,9 @@ save_times
 *.pyc
 Untitled.ipynb
 Untitled1.pynb
+ldaModel
+model
+target
+.ipynb_checkpoints
+__pycache__
+spark-warehouse
