@@ -17,5 +17,5 @@ scrape_pages(group_id,full_scrape,scraper_type)
 
 4. Currently the bulk of the processing is being done from the Examining data using Spark.ipynb notebook. You can open the notebook and specify the name of your CSV (we are working on automating this).
 
-5. Run through the notebook and make any changes/additions you want. We are currently working on adding an additional notebook which will include the use of Kafka and Spark streaming, however this is still very raw.
+5. Run through the notebook and make any changes/additions you want. We are currently working on adding an additional notebook (i.e. Streaming Data using Kafka + Spark Streaming.ipynb) which will include the use of Kafka and Spark streaming, however this is still very raw.
 ### Scrape away!
