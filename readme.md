@@ -1,5 +1,5 @@
 # Facebook scraper and processer
-[![Travis](https://img.shields.io/travis/isaacmg/fb_scraper.svg?branch=master)]()
+[![Travis](https://travis-ci.org/isaacmg/fb_scraper.svg?branch=master)]()
 
 
 The goal of this project is to extract data from Facebook Posts (on pages and in groups) and then send it to Spark for analysis by NLP algorithms. For our purposes we want to extract information about upcoming paddling meetups, videos of rivers, flow info, and reports on streams. However, our solution should be generalizable to other datasets as well. In our setup data will then be combined with relevant data from Twitter, USGS, Instagram, and paddling message boards in order to provide targeted reccomendations to our users. Relevant information about rivers will be added to our PaddleSearch search engine for easy by our users searching later on. In the future we hope to utilize Facebook Webhooks in order to get the data in realtime, however this currently is not availible for groups. While this is primarily targeted to paddling we hope people will find this useful in fullfilling any data extraction/analysis task that uses the FB API.The scraper itself was orginally taken from the facebook-page-post-scraper by minimaxir which you can read about [here](https://github.com/minimaxir/acebook-page-post-scraper) for more information. 
