@@ -3,10 +3,8 @@ import json
 import datetime
 import csv
 import time
-import codecs
 from kafka import KafkaProducer
-from avro import schema, datafile, io
-import io as io2
+
 def init_kafka():
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
     producer.send('test', b'another_message').get(timeout=60)
@@ -19,6 +17,8 @@ def get_as_json(items):
      "num_shares": items[8], "num_likes": items[9], "num_loves": items[10]}
     return message
 def serialize(items):
+    from avro import schema, io
+    import io as io2
     SCHEMA = schema.Parse(json.dumps({
         "namespace": "example.avro",
         "type": "record",
