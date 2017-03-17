@@ -6,3 +6,6 @@ install:
   - pip install -r requirements.txt
 script:
   - python tests/fb_posts_test.py
+  
+after_success:
+  - codecov
