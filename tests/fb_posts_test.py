@@ -4,6 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access
+from fb_posts import getFacebookPageFeedData
 def test_func(page_id,d):
     if page_id in d:
         return 1
@@ -24,6 +25,16 @@ class MyTest(unittest.TestCase):
         self.assertEqual(get_tstamp("13142345", 1,"test"), str(timestamp))
     def test_access_t(self):
         self.assertEquals(get_access("54449",'text.txt'),"54449|awerqwerdummytext")
+    def test_getFacebookPageFeedData(self):
+        access = "238791666290359|" + os.environ['FB_KEY']
+        data = getFacebookPageFeedData("176485839144245", access, 100, 0 )
+        if("message" in data["data"][0]):
+            good = 1
+        else:
+            good = 2
+        self.assertEquals(good,1)
+
+
 
 
 
