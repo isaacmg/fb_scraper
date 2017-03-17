@@ -7,9 +7,10 @@ import codecs
 from kafka import KafkaProducer
 from avro import schema, datafile, io
 import io as io2
-
-producer = KafkaProducer(bootstrap_servers='localhost:9092')
-producer.send('test', b'another_message').get(timeout=60)
+def init_kafka():
+    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    producer.send('test', b'another_message').get(timeout=60)
+    return producer
 
 #producer.send('foober',"some message")
 def get_as_json(items):
@@ -213,6 +214,7 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
 
                     # To do serialize data properly in Avro berfore sending
                     # Also make the key be the name of the facebook group for easy trackingcom
+                    producer = init_kafka()
                     producer.send('fb', key=b'foo', value=byew)
                     #producer.send('test', key=b'foo', value=a)
 

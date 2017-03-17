@@ -8,7 +8,7 @@ scraper_type = 0
 # Full scrape example without streaming
 #scrape_pages(group_id,0,1)
 # Scrape lastest posts
-scrape_pages(group_id,0,0)
+scrape_pages(group_id,0,1)
 
 
 

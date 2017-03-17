@@ -160,7 +160,7 @@ def scrapeFacebookPageFeedStatus2(page_id, access_token, tStamp):
 
                 # Ensure it is a status with the expected metadata
                 if 'reactions' in status:
-                    w.writerow(processFacebookPageFeedStatus2(status,
+                    w.writerow(processFacebookPageFeedStatus(status,
                         access_token))
 
 

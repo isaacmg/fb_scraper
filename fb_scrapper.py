@@ -12,21 +12,14 @@ def scrape_pages(page_id, from_time, function_number):
     funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2]
     scrape(page_id, from_time, funcs[function_number] )
 
-def scrape(page_id,tstamp,scrape_func):
-    with open('app.txt', 'r') as f:
-        f.readline().strip("/n")
-        second_line = f.readline()
-    app_id = "238791666290359"
-    app_secret = second_line
-    access_token = app_id + "|" + app_secret
-
+# Get to time scrape from
+def get_tstamp(page_id, tstamp ,path):
     if tstamp is 1:
-        d = shelve.open('save_times')
+        d = shelve.open(path)
         if page_id in d:
             time_opened = d[page_id]
             pageStamp = str(time_opened)
             print("Scraping since unix time " + pageStamp)
-            scrape_func(page_id, access_token, pageStamp)
         else:
             print("key not found in dict proceeding with full scrape")
             pageStamp = -2180131200
@@ -34,10 +27,32 @@ def scrape(page_id,tstamp,scrape_func):
         pageStamp = -2180131200
     else:
         pageStamp=tstamp
-    scrape_func(page_id, access_token, pageStamp)
+    return pageStamp
+
+# Save the time the last time page was scraped
+def save_shelve(page_id, path):
     timestamp = int(time.time())
-    d = shelve.open('save_times')
+    d = shelve.open(path)
     d[page_id] = timestamp
+    d.close()
+    return "shelve successfully saved at time"
+
+#
+def get_access(app_id, path):
+    with open(path, 'r') as f:
+        f.readline().strip("/n")
+        second_line = f.readline()
+    app_secret = second_line
+    access_token = app_id + "|" + app_secret
+    return access_token
+
+
+def scrape(page_id,tstamp,scrape_func):
+    access_token = get_access("238791666290359",'app.txt')
+    pageStamp = get_tstamp(page_id, tstamp, "save_times")
+    scrape_func(page_id, access_token, pageStamp)
+    save_shelve(page_id,'save_times')
+
 
 
 #if __name__ == '__main__':
