@@ -44,7 +44,7 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses,tStamp):
 
     # retrieve data
     data = json.loads(request_until_succeed(url))
-    print(data)
+
     return data
 
 def getReactionsForStatus(status_id, access_token):

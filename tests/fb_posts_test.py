@@ -4,7 +4,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access
-from fb_posts import getFacebookPageFeedData
+from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
+
 def test_func(page_id,d):
     if page_id in d:
         return 1
@@ -33,6 +34,17 @@ class MyTest(unittest.TestCase):
         else:
             good = 2
         self.assertEquals(good,1)
+    def test_procesFacebookPageFeedStatus(self):
+        a ={'message': 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', 'comments': {'summary': {'can_comment': False, 'total_count': 1, 'order': 'chronological'}, 'data': []}, 'reactions': {'summary': {'total_count': 0, 'viewer_reaction': 'NONE'}, 'data': []}, 'created_time': '2017-02-03T13:55:35+0000', 'type': 'status', 'id': '115285708497149_1769803846378652'}
+        access = "238791666290359|" + os.environ['FB_KEY']
+        self.assertEqual(processFacebookPageFeedStatus(a,access), ('115285708497149_1769803846378652', 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', '', 'status', '', '2017-02-03 08:55:35', 0, 1, 0, 0, 0, 0, 0, 0, 0))
+    def test_getReactionsForStatus(self):
+        access = "238791666290359|" + os.environ['FB_KEY']
+        status_id = "115285708497149_1700908723268165"
+        print(getReactionsForStatus(status_id, access))
+        self.assertEquals(getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
+
+
 
 
 
