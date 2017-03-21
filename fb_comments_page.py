@@ -85,7 +85,7 @@ def processFacebookComment(comment, status_id, parent_id = ''):
     return (comment_id, status_id, parent_id, comment_message, comment_author,
             comment_published, comment_likes)
 
-def scrapeFacebookPageFeedComments(file_id, access_token, tstamp, useless_param):
+def scrapeFacebookPageFeedComments(file_id, access_token, tstamp):
     with open('%s_facebook_comments.csv' % file_id, 'w', newline='', encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["comment_id", "status_id", "parent_id", "comment_message",
@@ -117,7 +117,7 @@ def scrapeFacebookPageFeedComments(file_id, access_token, tstamp, useless_param)
                             has_next_subpage = True
 
                             subcomments = getFacebookCommentFeedData(
-                                    comment['id'], access_token, 100)
+                                    comment['id'], access_token, 100, tstamp)
 
                             while has_next_subpage:
                                 for subcomment in subcomments['data']:

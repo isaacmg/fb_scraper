@@ -8,7 +8,7 @@ group_id = "115285708497149"
 
 # This function is currently not properly working and will scrape all comments
 def scrape_comments_from_last_scrape(group_id):
-    scrape_groups_pages(id, 1, 2, True)
+    scrape_groups_pages(group_id, 1, 2, True)
 
 # Scrape since the last time stamp for the id in the shelve file
 def scrape_posts_from_last_scrape(group_id):
@@ -25,6 +25,5 @@ def scrape_all_posts(group_id):
 def scrape_all_comments(group_id):
     scrape_groups_pages(group_id, 0, 2, True)
 
-
-scrape_all_posts(group_id)
+scrape_comments_from_last_scrape(group_id)
 
