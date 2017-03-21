@@ -9,9 +9,9 @@ import time
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
 # To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
 # To do create unit tests to make sure it runs.
-def scrape_groups_pages(page_id, from_time, function_number, page_or_group, comments):
+def scrape_groups_pages(page_id, from_time, function_number, comments):
     funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2, scrapeFacebookPageFeedComments]
-    scrape(page_id, from_time, funcs[function_number], page_or_group, comments)
+    scrape(page_id, from_time, funcs[function_number], comments)
 
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):
@@ -48,7 +48,7 @@ def get_access(app_id, path):
     return access_token
 
 
-def scrape(page_id,tstamp,scrape_func, page_or_group, comments):
+def scrape(page_id,tstamp,scrape_func, comments):
     access_token = get_access("238791666290359",'app.txt')
     if comments:
         pageStamp = get_tstamp(page_id + "_comments", tstamp, "save_times")
@@ -56,7 +56,7 @@ def scrape(page_id,tstamp,scrape_func, page_or_group, comments):
     else:
         pageStamp = get_tstamp(page_id, tstamp, "save_times")
         save_shelve(page_id,'save_times')
-    scrape_func(page_id, access_token, pageStamp, page_or_group)
+    scrape_func(page_id, access_token, pageStamp)
 
 
 
