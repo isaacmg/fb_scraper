@@ -182,7 +182,7 @@ def processFacebookPageFeedStatus(status, access_token):
             status_published, num_reactions, num_comments, num_shares,
             num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
-def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
+def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp, group_or_page):
     with open('%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",

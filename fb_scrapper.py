@@ -1,6 +1,7 @@
 import shelve
 from fb_posts import scrapeFacebookPageFeedStatus2
 from fb_posts_realtime import scrapeFacebookPageFeedStatus
+from fb_comments_page import scrapeFacebookPageFeedComments
 import time
 
 #import fb_pages
@@ -8,9 +9,9 @@ import time
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
 # To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
 # To do create unit tests to make sure it runs.
-def scrape_pages(page_id, from_time, function_number):
-    funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2]
-    scrape(page_id, from_time, funcs[function_number] )
+def scrape_groups_pages(page_id, from_time, function_number, page_or_group, comments):
+    funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2, scrapeFacebookPageFeedComments]
+    scrape(page_id, from_time, funcs[function_number], page_or_group, comments)
 
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):
@@ -47,11 +48,16 @@ def get_access(app_id, path):
     return access_token
 
 
-def scrape(page_id,tstamp,scrape_func):
+def scrape(page_id,tstamp,scrape_func, page_or_group, comments):
     access_token = get_access("238791666290359",'app.txt')
-    pageStamp = get_tstamp(page_id, tstamp, "save_times")
-    scrape_func(page_id, access_token, pageStamp)
-    save_shelve(page_id,'save_times')
+    if comments:
+        pageStamp = get_tstamp(page_id + "_comments", tstamp, "save_times")
+        save_shelve(page_id + "_comments", 'save_times')
+    else:
+        pageStamp = get_tstamp(page_id, tstamp, "save_times")
+        save_shelve(page_id,'save_times')
+    scrape_func(page_id, access_token, pageStamp, page_or_group)
+
 
 
 
