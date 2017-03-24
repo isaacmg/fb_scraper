@@ -3,7 +3,7 @@
 [![Codecov branch](https://img.shields.io/codecov/c/github/isaacmg/fb_scraper.svg)]()
 [![Code Health](https://landscape.io/github/isaacmg/fb_scraper/master/landscape.svg?style=flat)](https://landscape.io/github/isaacmg/fb_scraper/master)
 
-The goal of this project is to implement a Facebook scraping and extraction engine. This project is originally based on the scraper from minimaxir which you can find [here](https://github.com/minimaxir/acebook-page-post-scraper). However, our project aims to take this one step further and create a continous scraping and processing system which can easily be deployed into production. Specfically, for our purposes we want to extract information about upcoming paddling meetups, event information, flow info, and other river related reports. However, this project should be useful for anyone who needs regular scrapping of FB pages or groups. 
+The goal of this project is to implement a Facebook scraping and extraction engine. This project is originally based on the scraper from minimaxir which you can find [here](https://github.com/minimaxir/facebook-page-post-scraper). However, our project aims to take this one step further and create a continous scraping and processing system which can easily be deployed into production. Specfically, for our purposes we want to extract information about upcoming paddling meetups, event information, flow info, and other river related reports. However, this project should be useful for anyone who needs regular scrapping of FB pages or groups. 
 
 ## Instructions
 
@@ -20,9 +20,9 @@ group_id = "115285708497149"
 scrape_posts_from_last_scrape(group_id)
 scrape_comments_from_last_scrape(group_id)
 ```
-3. If you choose the first function (i.e 0) it will attempt to use Kafka to message scraping results in realtime AND write to the CSV. If you do not have Kafka use 1 instead and it will just generate the CSV.
+3. Note that our messaging system using Kafka is very experimental and there are currently no tests so use at your own risk.
 
-4. Currently the bulk of the processing is being done from the Examining data using Spark.ipynb notebook. You can open the notebook and specify the name of your CSV (we are working on automating this).
+4. Currently the majority of examples are contained in the Examining data using Spark.ipynb notebook. You can open the notebook and specify the name of your CSV.
 
 5. Run through the notebook and make any changes/additions you want. We are currently working on adding an additional notebook (i.e. Streaming Data using Kafka + Spark Streaming.ipynb) which will include the use of Kafka and Spark streaming, however this is still very raw.
 ### Scrape away!
