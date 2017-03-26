@@ -15,7 +15,7 @@ d = datetime(2017, 1, 17, 3, 15,00)
 dag = DAG('run_facebook', start_date = d, schedule_interval = '16 * * * *', default_args = args)
 
 t_main = BashOperator(
-  task_id = 'usgs_fetch'
+    task_id = 'fb_scrape'
   , dag = dag
   , bash_command = 'python Documents/Tech/scraper/get_posts.py'
   )
