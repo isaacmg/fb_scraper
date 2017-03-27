@@ -86,7 +86,7 @@ def processFacebookComment(comment, status_id, parent_id = ''):
             comment_published, comment_likes)
 
 def scrapeFacebookPageFeedComments(file_id, access_token, tstamp):
-    with open('%s_facebook_comments.csv' % file_id, 'w', newline='', encoding='utf-8') as file:
+    with open('data/files/%s_facebook_comments.csv' % file_id, 'w', newline='', encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["comment_id", "status_id", "parent_id", "comment_message",
             "comment_author", "comment_published", "comment_likes"])
@@ -97,7 +97,7 @@ def scrapeFacebookPageFeedComments(file_id, access_token, tstamp):
         print("Scraping %s Comments From Posts: %s\n" % \
                 (file_id, scrape_starttime))
 
-        with open('%s_facebook_statuses.csv' % file_id, 'r', encoding='utf-8') as csvfile:
+        with open('data/files/%s_facebook_statuses.csv' % file_id, 'r', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
 
             #reader = [dict(status_id='759985267390294_1158001970921953')]
@@ -164,4 +164,3 @@ def scrapeFacebookPageFeedComments(file_id, access_token, tstamp):
 
         print("\nDone!\n%s Comments Processed in %s" %
               (num_processed, datetime.datetime.now() - scrape_starttime))
-
