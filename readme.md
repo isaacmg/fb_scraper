@@ -9,7 +9,7 @@ The goal of this project is to implement a Facebook scraping and extraction engi
 
 To get the ID of a Facebook group go [here](https://lookup-id.com) and input the url of the page or group you are trying to scrape.
 
-### You will need to have Python 3.5 installed along with Spark and Jupyter Notebooks.
+### You will need to have Python 3.5+ installed along with Spark and Jupyter Notebooks.
 
 1. Create a file called app.txt and place your app_id in it along with your app_secret.
 2. Use get_posts.py to pull data from a FB Group. So far we have provided five basic functions. Basically you can either do a full scrape or scrape from the last time stamp. You can also choose whether you want to write to a CSV or send the posts as Kafka messages. See get_posts.py for more details.
@@ -22,7 +22,10 @@ scrape_comments_from_last_scrape(group_id)
 ```
 3. Note that our messaging system using Kafka is very experimental and there are currently no tests so use at your own risk.
 
-4. Currently the majority of examples are contained in the Examining data using Spark.ipynb notebook. You can open the notebook and specify the name of your CSV.
+4. Currently the majority of examples are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV or import the scraper.
 
 5. Run through the notebook and make any changes/additions you want. We are currently working on adding an additional notebook (i.e. Streaming Data using Kafka + Spark Streaming.ipynb) which will include the use of Kafka and Spark streaming, however this is still very raw.
+
+6. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder.
+
 ### Scrape away!
