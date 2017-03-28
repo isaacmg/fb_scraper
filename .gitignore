@@ -61,5 +61,5 @@ target
 .ipynb_checkpoints
 __pycache__
 spark-warehouse
-.dat
-.db
+*.dat
+*.db
