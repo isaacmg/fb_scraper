@@ -25,4 +25,4 @@ def scrape_all_posts(group_id):
 def scrape_all_comments(group_id):
     scrape_groups_pages(group_id, 0, 2, True)
 
-scrape_posts_from_last_scrape(group_id)
+#scrape_posts_from_last_scrape(group_id)
