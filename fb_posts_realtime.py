@@ -183,6 +183,7 @@ def processFacebookPageFeedStatus(status, access_token):
             num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
 def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
+    producer = init_kafka()
     with open('data/files/%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",
@@ -205,17 +206,15 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, tStamp):
                 if 'reactions' in status:
                     s = processFacebookPageFeedStatus(status,
                         access_token)
-                    print(s)
+                    
 
 
-
-                    byew = serialize(s)
-
-
-                    # To do serialize data properly in Avro berfore sending
-                    # Also make the key be the name of the facebook group for easy trackingcom
-                    producer = init_kafka()
-                    producer.send('fb', key=b'foo', value=byew)
+                    # Serialize the message
+                    message_data= serialize(s)
+                    print(message_data)
+                    # Also make the key be the name of the facebook group for easy tracking
+                    my_str_as_bytes = str.encode(page_id)
+                    producer.send('fb', key=my_str_as_bytes, value=message_data)
                     #producer.send('test', key=b'foo', value=a)
 
 

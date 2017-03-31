@@ -2,7 +2,7 @@ from fb_scrapper import scrape_groups_pages
 # To use our application you can use scrape_groups_pages or use one of our predefined functions
 
 # Declare your group or page id here
-group_id = "115285708497149"
+group_id = "canoeandkayak"
 
 # Choose which scraping function you want to call
 
@@ -25,4 +25,4 @@ def scrape_all_posts(group_id):
 def scrape_all_comments(group_id):
     scrape_groups_pages(group_id, 0, 2, True)
 
-#scrape_posts_from_last_scrape(group_id)
+#scrape_posts_from_last_scrape_kafka(group_id)

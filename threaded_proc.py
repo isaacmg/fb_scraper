@@ -1,7 +1,7 @@
 import queue
 import threading
 import time
-from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape
+from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape_kafka
 exitFlag = 0
 
 class scrapeThread (threading.Thread):
@@ -21,7 +21,7 @@ def process_data(threadName, q):
       if not workQueue.empty():
          data = workQueue.get()
          queueLock.release()
-         scrape_posts_from_last_scrape(data)
+         scrape_posts_from_last_scrape_kafka(data)
       else:
          queueLock.release()
          time.sleep(1)

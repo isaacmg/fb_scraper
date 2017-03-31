@@ -1,4 +1,4 @@
 kafka 
-avro
+avro-python3
 codecov
 coverage
