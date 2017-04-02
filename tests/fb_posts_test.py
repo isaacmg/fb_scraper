@@ -25,15 +25,15 @@ class MyTest(unittest.TestCase):
         d["13142345"] = timestamp
         self.assertEqual(get_tstamp("13142345", 1,"test"), str(timestamp))
     def test_access_t(self):
-        self.assertEquals(get_access("54449",'data/files/text.txt'),"54449|awerqwerdummytext")
+        self.assertEqual(get_access("54449",'data/files/text.txt'),"54449|awerqwerdummytext")
     def test_getFacebookPageFeedData(self):
         access = "238791666290359|" + os.environ['FB_KEY']
-        data = getFacebookPageFeedData("176485839144245", access, 100, 0 )
+        data = getFacebookPageFeedData("paddlesoft", access, 100, 0 )
         if("message" in data["data"][0]):
             good = 1
         else:
             good = 2
-        self.assertEquals(good,1)
+        self.assertEqual(good,1)
     def test_procesFacebookPageFeedStatus(self):
         a ={'message': 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', 'comments': {'summary': {'can_comment': False, 'total_count': 1, 'order': 'chronological'}, 'data': []}, 'reactions': {'summary': {'total_count': 0, 'viewer_reaction': 'NONE'}, 'data': []}, 'created_time': '2017-02-03T13:55:35+0000', 'type': 'status', 'id': '115285708497149_1769803846378652'}
         access = "238791666290359|" + os.environ['FB_KEY']
