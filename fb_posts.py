@@ -3,7 +3,7 @@ import json
 import datetime
 import csv
 import time
-import codecs
+
 
 
 def request_until_succeed(url):
