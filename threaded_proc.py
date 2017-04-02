@@ -12,7 +12,7 @@ class scrapeThread (threading.Thread):
 
    def run(self):
       print ("Starting " + self.name)
-      process_data(self.name)
+      process_data()
       print ("Exiting " + self.name)
 
 def process_data():
@@ -33,7 +33,7 @@ def start_threads(threadList):
     threads = []
     threadID = 1
     for tName in threadList:
-       thread = scrapeThread(threadID, tName, workQueue)
+       thread = scrapeThread(threadID, tName)
        thread.start()
        threads.append(thread)
        threadID += 1
