@@ -1,6 +1,8 @@
 import queue
 import threading
 import time
+import urllib.request
+import os
 from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape_kafka
 exitFlag = 0
 
@@ -26,8 +28,13 @@ def process_data():
          queueLock.release()
          time.sleep(1)
 def load_id_file(path):
-    lines = open(path).read().splitlines()
-    print(lines)
+    try:
+        lines = open(path).read().splitlines()
+    except:
+        print("failed to find file now going based on environment variable url")
+        #data = urllib.request(os.envi)
+        data = os.environ['IDS']
+        lines = data.split(",")
     return lines
 def start_threads(threadList):
     threads = []

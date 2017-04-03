@@ -3,6 +3,7 @@ from fb_posts import scrapeFacebookPageFeedStatus2
 from fb_posts_realtime import scrapeFacebookPageFeedStatus
 from fb_comments_page import scrapeFacebookPageFeedComments
 import time
+import os
 
 #import fb_pages
 # Function to scrape with.
@@ -39,17 +40,23 @@ def save_shelve(page_id, path):
     return "shelve successfully saved at time"
 
 #
-def get_access(app_id, path):
-    with open(path, 'r') as f:
-        f.readline().strip("/n")
-        second_line = f.readline()
-    app_secret = second_line
-    access_token = app_id + "|" + app_secret
+def get_access(path):
+    try:
+        with open(path, 'r') as f:
+            app_id =f.readline().strip("\n")
+            print(app_id)
+            second_line = f.readline()
+            app_secret = second_line
+            access_token = app_id + "|" + app_secret
+            print(access_token)
+    except:
+        print("app.txt not found will now try getting data from environment variables")
+        access_token = os.environ['FB_ID'] + "|" + os.environ['FB_KEY']
     return access_token
 
 
 def scrape(page_id,tstamp,scrape_func, comments):
-    access_token = get_access("238791666290359",'app.txt')
+    access_token = get_access('app.txt')
     if comments:
         pageStamp = get_tstamp(page_id + "_comments", tstamp, "save_times")
         save_shelve(page_id + "_comments", 'save_times')
@@ -64,5 +71,3 @@ def scrape(page_id,tstamp,scrape_func, comments):
 #if __name__ == '__main__':
     #group_id = "115285708497149"
     #scrape(group_id, 0,scrapeFacebookPageFeedStatus2)
-
-

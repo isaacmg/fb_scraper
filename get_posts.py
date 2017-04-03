@@ -2,7 +2,7 @@ from fb_scrapper import scrape_groups_pages
 # To use our application you can use scrape_groups_pages or use one of our predefined functions
 
 # Declare your group or page id here
-group_id = "canoeandkayak"
+#group_id = "canoeandkayak"
 
 # Choose which scraping function you want to call
 
