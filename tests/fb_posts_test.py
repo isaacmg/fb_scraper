@@ -25,7 +25,7 @@ class MyTest(unittest.TestCase):
         d["13142345"] = timestamp
         self.assertEqual(get_tstamp("13142345", 1,"test"), str(timestamp))
     def test_access_t(self):
-        self.assertEqual(get_access('data/files/text.txt'),"54449|awerqwerdummytext")
+        self.assertEqual(get_access('data/files/text.txt'),"999999999|awerqwerdummytext")
     def test_getFacebookPageFeedData(self):
         access = "238791666290359|" + os.environ['FB_KEY']
         data = getFacebookPageFeedData("paddlesoft", access, 100, 0 )
