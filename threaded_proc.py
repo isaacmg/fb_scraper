@@ -3,7 +3,8 @@ import threading
 import time
 import urllib.request
 import os
-from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape_kafka
+from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape
+from aws_s3 import init_s3
 exitFlag = 0
 
 class scrapeThread (threading.Thread):
@@ -23,7 +24,7 @@ def process_data():
       if not workQueue.empty():
          data = workQueue.get()
          queueLock.release()
-         scrape_posts_from_last_scrape_kafka(data)
+         scrape_posts_from_last_scrape(data)
       else:
          queueLock.release()
          time.sleep(1)
@@ -72,3 +73,6 @@ exitFlag = 1
 for t in threads:
    t.join()
 print ("Exiting Main Thread")
+if os.environ["USE_AWS"] is "1":
+    init_s3()
+    print("files saved to AWS")
