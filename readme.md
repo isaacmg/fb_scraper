@@ -9,7 +9,7 @@ The goal of this project is to implement a Facebook scraping and extraction engi
 ## Instructions
 
 To get the ID of a Facebook group go [here](https://lookup-id.com) and input the url of the page or group you are trying to scrape.
-
+For instructions on how to use our Dockerfile please see wiki page.
 ### You will need to have Python 3.5+. If you want to use the examples you will need Jupyter Notebooks and Spark.
 
 1. Create a file called app.txt and place your app_id in it along with your app_secret.
