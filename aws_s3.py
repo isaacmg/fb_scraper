@@ -8,7 +8,7 @@ def init_s3():
     BUCKET_NAME = os.environ["BUCKET_NAME"]
     conn = S3Connection(os.environ['AWS_ID'], os.environ['AWS_SECRET'], host=REGION_HOST)
     #mybucket = conn.get_bucket('fbdatabucket')
-    mybucket = conn.get_bucket([BUCKET_NAME])
+    mybucket = conn.get_bucket(os.environ['BUCKET_NAME'])
     for file in os.listdir("data/files"):
         if file.endswith(".csv"):
             k = Key(mybucket)

@@ -73,6 +73,7 @@ exitFlag = 1
 for t in threads:
    t.join()
 print ("Exiting Main Thread")
+print(os.environ["USE_AWS"])
 if os.environ["USE_AWS"] is "1":
     init_s3()
     print("files saved to AWS")
