@@ -20,8 +20,8 @@ def request_until_succeed(url):
             print("Error for URL %s: %s" % (url, datetime.datetime.now()))
             print("Retrying.")
 
-            if '400' in str(e):
-                return None;
+            if '400' or '500' or '404' in str(e):
+                return None
 
     return response.read().decode('utf-8')
 

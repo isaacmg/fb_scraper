@@ -6,6 +6,7 @@ import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access
 from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
 
+
 def test_func(page_id,d):
     if page_id in d:
         return 1
@@ -43,6 +44,7 @@ class MyTest(unittest.TestCase):
         status_id = "115285708497149_1700908723268165"
         print(getReactionsForStatus(status_id, access))
         self.assertEquals(getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
+
 
 
 

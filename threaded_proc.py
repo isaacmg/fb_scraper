@@ -1,7 +1,6 @@
 import queue
 import threading
 import time
-import urllib.request
 import os
 from fb_scrapper import scrape_groups_pages
 from aws_s3 import init_s3
