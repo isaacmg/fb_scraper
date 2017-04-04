@@ -63,7 +63,7 @@ def get_scrape_type():
         use_kafka =0
     # By default only scrape since last time stamp
     full_scrape = 1
-    if "FULL_SCRAPE" in os.environ
+    if "FULL_SCRAPE" in os.environ:
         if os.environ['FULL_SCRAPE'] is "0":
             full_scrape = 0
     return full_scrape, use_kafka
