@@ -1,4 +1,4 @@
-# Facebook scraper and processer
+# FBLYZE: a Facebook page and group scraping and analysis system.
 [![Travis](https://travis-ci.org/isaacmg/fb_scraper.svg?branch=master)](https://travis-ci.org/isaacmg/fb_scraper)
 [![Codecov branch](https://img.shields.io/codecov/c/github/isaacmg/fb_scraper.svg)]()
 [![Code Health](https://landscape.io/github/isaacmg/fb_scraper/master/landscape.svg?style=flat)](https://landscape.io/github/isaacmg/fb_scraper/master)

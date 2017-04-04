@@ -3,7 +3,7 @@ import threading
 import time
 import urllib.request
 import os
-from get_posts import scrape_comments_from_last_scrape, scrape_posts_from_last_scrape
+from fb_scrapper import scrape_groups_pages
 from aws_s3 import init_s3
 exitFlag = 0
 
@@ -12,7 +12,6 @@ class scrapeThread (threading.Thread):
       threading.Thread.__init__(self)
       self.threadID = threadID
       self.name = name
-
    def run(self):
       print ("Starting " + self.name)
       process_data()
@@ -24,7 +23,10 @@ def process_data():
       if not workQueue.empty():
          data = workQueue.get()
          queueLock.release()
-         scrape_posts_from_last_scrape(data)
+         full_scrape, use_kafka = get_scrape_type()
+         scrape_groups_pages(data, full_scrape, use_kafka, False)
+         if "COMMENTS" in os.environ:
+             scrape_groups_pages(data, 0, 2, True)
       else:
          queueLock.release()
          time.sleep(1)
@@ -53,6 +55,19 @@ def init_queue(nameList):
        workQueue.put(word)
     queueLock.release()
     return workQueue
+def get_scrape_type():
+    # Somewhat backwards but for kafka one is false and 0 is true
+    # By default do not use Kafka
+    use_kafka = 1
+    if "USE_KAFKA" in os.environ:
+        use_kafka =0
+    # By default only scrape since last time stamp
+    full_scrape = 1
+    if "FULL_SCRAPE" in os.environ
+        if os.environ['FULL_SCRAPE'] is "0":
+            full_scrape = 0
+    return full_scrape, use_kafka
+
 
 threadList = ["Thread-1", "Thread-2", "Thread-3"]
 nameList = load_id_file("id.txt")
