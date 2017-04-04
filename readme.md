@@ -2,6 +2,7 @@
 [![Travis](https://travis-ci.org/isaacmg/fb_scraper.svg?branch=master)](https://travis-ci.org/isaacmg/fb_scraper)
 [![Codecov branch](https://img.shields.io/codecov/c/github/isaacmg/fb_scraper.svg)]()
 [![Code Health](https://landscape.io/github/isaacmg/fb_scraper/master/landscape.svg?style=flat)](https://landscape.io/github/isaacmg/fb_scraper/master)
+[![Docker Pulls](https://img.shields.io/docker/pulls/paddlesoft/fb-scraping.svg)](https://hub.docker.com/r/paddlesoft/fb-scraping/)
 
 The goal of this project is to implement a Facebook scraping and extraction engine. This project is originally based on the scraper from minimaxir which you can find [here](https://github.com/minimaxir/facebook-page-post-scraper). However, our project aims to take this one step further and create a continous scraping and processing system which can easily be deployed into production. Specifically, for our purposes we want to extract information about upcoming paddling meetups, event information, flow info, and other river related reports. However, this project should be useful for anyone who needs regular scrapping of FB pages or groups.
 
