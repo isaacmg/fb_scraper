@@ -36,8 +36,8 @@ def getFacebookCommentFeedData(status_id, access_token, num_comments, tStamp):
         base = "https://graph.facebook.com/v2.6"
         node = "/%s/comments" % status_id
         fields = "?fields=id,message,like_count,created_time,comments,from,attachment"
-        parameters = "&order=chronological&limit=%s&since=%s&access_token=%s" % \
-                (num_comments, tStamp, access_token)
+        parameters = "&order=chronological&limit=%s&access_token=%s" % \
+                (num_comments, access_token)
 
 
 
@@ -48,6 +48,7 @@ def getFacebookCommentFeedData(status_id, access_token, num_comments, tStamp):
         if data is None:
             return None
         else:
+            print(json.loads(data))
             return json.loads(data)
 
 def processFacebookComment(comment, status_id, parent_id = ''):

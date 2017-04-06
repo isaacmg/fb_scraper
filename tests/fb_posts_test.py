@@ -5,6 +5,7 @@ import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access
 from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
+from fb_comments_page import getFacebookCommentFeedData, request_until_succeed
 
 
 def test_func(page_id,d):
@@ -44,19 +45,25 @@ class MyTest(unittest.TestCase):
         status_id = "115285708497149_1700908723268165"
         print(getReactionsForStatus(status_id, access))
         self.assertEquals(getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
+    def test_getFacebookCommentFeedData(self):
+        access_token = "238791666290359|" + os.environ['FB_KEY']
+        data = {'paging': {
+            'cursors': {'after': 'WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEV6T0RFMU9ERXhNamszTnpBd09Eb3hORGt3TlRreU9UQTUZD',
+                        'before': 'WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEV6TkRNeE5qa3lNek0yTVRFeU56b3hORGt3TWpJM05qUXkZD'}},
+         'data': [{'id': '1134316923361127', 'like_count': 0, 'created_time': '2017-03-23T00:07:22+0000',
+                   'message': 'what is the start time on friday?',
+                   'from': {'id': '10210829571228766', 'name': 'Mike Eddy'}},
+                  {'id': '1138158112977008', 'like_count': 1, 'created_time': '2017-03-27T05:35:09+0000',
+                   'message': 'Hey Mike - 6 pm to 9 pm.  Indoors.  Paperwork, expectations, get to know each other, knots, anchors, mechanical advantage overview, some systems, check a few ACA items off the list.    In the past we have met at Conway Fire, and will likely meet there again this year.  Its right in Conway Village.',
+                   'from': {'id': '10154257133022102', 'name': 'Darron Laughland'}}]}
+
+        self.assertEqual(getFacebookCommentFeedData("176485839144245_1128860933906726", access_token, 100, -2180131200), data)
 
 
 
 
 
-
-
-
-
-
-
-
-    #Fix timeout errors
+        #Fix timeout errors
 
 
 
