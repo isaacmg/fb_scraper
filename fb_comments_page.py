@@ -48,11 +48,10 @@ def getFacebookCommentFeedData(status_id, access_token, num_comments, tStamp):
         if data is None:
             return None
         else:
-            print(json.loads(data))
+
             return json.loads(data)
 
 def processFacebookComment(comment, status_id, parent_id = ''):
-
     # The status is now a Python dictionary, so for top-level items,
     # we can simply call the key.
 
@@ -82,6 +81,8 @@ def processFacebookComment(comment, status_id, parent_id = ''):
             '%Y-%m-%d %H:%M:%S') # best time format for spreadsheet programs
 
     # Return a tuple of all processed data
+    print((comment_id, status_id, parent_id, comment_message, comment_author,
+            comment_published, comment_likes))
 
     return (comment_id, status_id, parent_id, comment_message, comment_author,
             comment_published, comment_likes)

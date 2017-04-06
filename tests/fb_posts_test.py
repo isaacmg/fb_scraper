@@ -5,7 +5,7 @@ import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access
 from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
-from fb_comments_page import getFacebookCommentFeedData, request_until_succeed
+from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
 
 
 def test_func(page_id,d):
@@ -58,6 +58,9 @@ class MyTest(unittest.TestCase):
                    'from': {'id': '10154257133022102', 'name': 'Darron Laughland'}}]}
 
         self.assertEqual(getFacebookCommentFeedData("176485839144245_1128860933906726", access_token, 100, -2180131200), data)
+    def test_processFacebookComment(self):
+        comment = {'id': '1108028642656622', 'created_time': '2017-02-24T21:32:02+0000', 'message': 'Sweet Thanks', 'like_count': 0, 'from': {'id': '10158516794680088', 'name': 'Jake Risch'}}
+        self.assertEqual(processFacebookComment(comment,"176485839144245_1108023245990495",''),('1108028642656622', '176485839144245_1108023245990495', '', b'Sweet Thanks', b'Jake Risch', '2017-02-24 16:32:02', 0))
 
 
 
