@@ -13,6 +13,8 @@ import os
 def scrape_groups_pages(page_id, from_time, function_number, comments):
     funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2, scrapeFacebookPageFeedComments]
     scrape(page_id, from_time, funcs[function_number], comments)
+    print("Sucessfully scraped from " + str(from_time) + " " + funcs[function_number].__name__ + "for page id " + str(page_id))
+    return "Sucessfully scraped from " + str(from_time) + " " + funcs[function_number].__name__ + "for page id " + str(page_id)
 
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):

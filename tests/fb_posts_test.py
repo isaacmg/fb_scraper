@@ -3,10 +3,20 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import shelve
 import time
-from fb_scrapper import save_shelve,  get_tstamp, get_access
+from fb_scrapper import save_shelve,  get_tstamp, get_access, scrape_groups_pages
 from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
 from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
+from fb_posts_realtime import serialize
+from kafka_test import deserialize
 
+
+
+def get_as_json( items):
+    message = {"status_id": items[0], "status_message": items[1], "link_name": items[2], "status_type": items[3],
+               "status_link": items[4], "status_published": items[5], "num_reactions": items[6],
+               "num_comments": items[7],
+               "num_shares": items[8], "num_likes": items[9], "num_loves": items[10]}
+    return message
 
 def test_func(page_id,d):
     if page_id in d:
@@ -61,6 +71,15 @@ class MyTest(unittest.TestCase):
     def test_processFacebookComment(self):
         comment = {'id': '1108028642656622', 'created_time': '2017-02-24T21:32:02+0000', 'message': 'Sweet Thanks', 'like_count': 0, 'from': {'id': '10158516794680088', 'name': 'Jake Risch'}}
         self.assertEqual(processFacebookComment(comment,"176485839144245_1108023245990495",''),('1108028642656622', '176485839144245_1108023245990495', '', b'Sweet Thanks', b'Jake Risch', '2017-02-24 16:32:02', 0))
+    def test_groups_pages(self):
+        group_id = "paddlesoft"
+        self.assertEqual(scrape_groups_pages(group_id, 0, 1,  False), "Sucessfully scraped from 0 scrapeFacebookPageFeedStatus2for page id paddlesoft")
+        self.assertEqual(scrape_groups_pages(group_id, 0, 2, True), "Sucessfully scraped from 0 scrapeFacebookPageFeedCommentsfor page id paddlesoft")
+
+    def test_serialize(self):
+        testList = ('115285708497149_1731636350195402', 'One-day special session, Northampton, MA YMCA.','Northampton Pool Rolling Session', 'event', 'https://www.facebook.com/events/319137738480268/','2017-01-09 18:51:17', 1, 0, 0, 1, 0, 0, 0, 0, 0)
+        s = serialize(testList)
+        self.assertEqual(get_as_json(testList), deserialize(s))
 
 
 
