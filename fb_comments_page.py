@@ -82,8 +82,7 @@ def processFacebookComment(comment, status_id, parent_id = ''):
             '%Y-%m-%d %H:%M:%S') # best time format for spreadsheet programs
 
     # Return a tuple of all processed data
-    print((comment_id, status_id, parent_id, comment_message, comment_author,
-            comment_published, comment_likes))
+   
 
     return (comment_id, status_id, parent_id, comment_message, comment_author,
             comment_published, comment_likes)
