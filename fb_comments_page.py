@@ -52,6 +52,7 @@ def getFacebookCommentFeedData(status_id, access_token, num_comments, tStamp):
             return json.loads(data)
 
 def processFacebookComment(comment, status_id, parent_id = ''):
+    #print(comment)
     # The status is now a Python dictionary, so for top-level items,
     # we can simply call the key.
 
@@ -87,6 +88,8 @@ def processFacebookComment(comment, status_id, parent_id = ''):
     return (comment_id, status_id, parent_id, comment_message, comment_author,
             comment_published, comment_likes)
 
+
+# To do break large function into sub functions
 def scrapeFacebookPageFeedComments(file_id, access_token, tstamp):
     with open('data/files/%s_facebook_comments.csv' % file_id, 'w', newline='', encoding='utf-8') as file:
         w = csv.writer(file)
