@@ -37,11 +37,12 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses,tStamp):
     node = "/%s/feed" % page_id
 
 
-    fields = "/?" + "fields=message,link,created_time,type,name,id," + \
+    fields = "/?" + "fields=from,message,link,created_time,type,name,id," + \
             "comments.limit(0).summary(true),shares,reactions" + \
             ".limit(0).summary(true)"
     parameters =  "&limit=%s&since=%s&access_token=%s" % (num_statuses, tStamp, access_token)
     url = base + node + fields + parameters
+    print(url)
 
 
     # retrieve data
@@ -81,6 +82,7 @@ def processFacebookPageFeedStatus(status, access_token):
     # so must check for existence first
 
     status_id = status['id']
+    from_id = status['from']['id']
     status_message = '' if 'message' not in status.keys() else \
             unicode_normalize(status['message'])
     link_name = '' if 'name' not in status.keys() else \
@@ -137,14 +139,14 @@ def processFacebookPageFeedStatus(status, access_token):
 
     # Return a tuple of all processed data
 
-    return (status_id, status_message, link_name, status_type, status_link,
+    return (status_id, from_id, status_message, link_name, status_type, status_link,
             status_published, num_reactions, num_comments, num_shares,
             num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
 def scrapeFacebookPageFeedStatus2(page_id, access_token, tStamp):
     with open('data/files/%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
         w = csv.writer(file)
-        w.writerow(["status_id", "status_message", "link_name", "status_type",
+        w.writerow(["status_id", "from_id", "status_message", "link_name", "status_type",
                     "status_link", "status_published", "num_reactions",
                     "num_comments", "num_shares", "num_likes", "num_loves",
                     "num_wows", "num_hahas", "num_sads", "num_angrys"])

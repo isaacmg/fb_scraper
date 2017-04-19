@@ -16,6 +16,9 @@ def get_as_json(items):
      "status_link": items[4], "status_published": items[5], "num_reactions": items[6], "num_comments": items[7],
      "num_shares": items[8], "num_likes": items[9], "num_loves": items[10]}
     return message
+
+# TODO move serilization schema to file
+
 def serialize(items):
     from avro import schema, io
     import io as io2
