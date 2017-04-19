@@ -42,6 +42,7 @@ def getFacebookCommentFeedData(status_id, access_token, num_comments, tStamp):
 
 
         url = base + node + fields + parameters
+        print(url)
 
         # retrieve data
         data = request_until_succeed(url)

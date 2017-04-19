@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access, scrape_groups_pages
-from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus
+from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus, get_reaction_ids
 from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
 from fb_posts_realtime import serialize
 from kafka_test import deserialize
@@ -80,6 +80,10 @@ class MyTest(unittest.TestCase):
         testList = ('115285708497149_1731636350195402', 'One-day special session, Northampton, MA YMCA.','Northampton Pool Rolling Session', 'event', 'https://www.facebook.com/events/319137738480268/','2017-01-09 18:51:17', 1, 0, 0, 1, 0, 0, 0, 0, 0)
         s = serialize(testList)
         self.assertEqual(get_as_json(testList), deserialize(s))
+    def test_reaction_id(self):
+        status_id = ""
+        access_token = "354322838020934|" + os.environ['FB_KEY2']
+        self.assertEqual(get_reaction_ids(status_id,access_token), {'paging': {'cursors': {'after': 'TVRNeU1EVXpORFF6TURveE5EZAzVOelkxTnpVeU9qSTFOREE1TmpFMk1UTT0ZD', 'before': 'TVRRMk16WTFNak16TnpveE5EZAzVPVGMwT1RjMU9qSTFOREE1TmpFMk1UTT0ZD'}}, 'data': [{'type': 'LIKE', 'id': '10208663896982524'}, {'type': 'LIKE', 'id': '102107'}]})
 
 
 

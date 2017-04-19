@@ -24,6 +24,6 @@ def scrape_all_posts(group_id):
 
 def scrape_all_comments(group_id):
     scrape_groups_pages(group_id, 0, 2, True)
-
 scrape_all_posts("paddlesoft")
+scrape_all_comments("paddlesoft")
 #scrape_comments_from_last_scrape("176485839144245")
