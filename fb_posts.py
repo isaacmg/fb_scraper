@@ -42,7 +42,7 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses,tStamp):
             ".limit(0).summary(true)"
     parameters =  "&limit=%s&since=%s&access_token=%s" % (num_statuses, tStamp, access_token)
     url = base + node + fields + parameters
-    print(url)
+
 
 
     # retrieve data
@@ -51,6 +51,7 @@ def getFacebookPageFeedData(page_id, access_token, num_statuses,tStamp):
     return data
 
 def getReactionsForStatus(status_id, access_token):
+    print(status_id)
 
     # See http://stackoverflow.com/a/37239851 for Reactions parameters
         # Reactions are only accessable at a single-post endpoint
@@ -71,7 +72,19 @@ def getReactionsForStatus(status_id, access_token):
     data = json.loads(request_until_succeed(url))
 
     return data
+def get_reaction_ids(status_id, access_token):
+    base = "https://graph.facebook.com/v2.6"
+    node = "/%s" % status_id
+    parameters = "&access_token=%s" % access_token
+    reactions = "/reactions?fields=" \
+                "id,type"
+    url = base + node + reactions + parameters
+    data = json.loads(request_until_succeed(url))
+    # For now I'm just saving
 
+    with open("data/files/" + status_id +".txt", 'w') as f:
+        json.dump(data, f, ensure_ascii=False)
+    return data
 
 def processFacebookPageFeedStatus(status, access_token):
 
@@ -112,6 +125,7 @@ def processFacebookPageFeedStatus(status, access_token):
     # Counts of each reaction separately; good for sentiment
     # Only check for reactions if past date of implementation:
     # http://newsroom.fb.com/news/2016/02/reactions-now-available-globally/
+    print(get_reaction_ids(status_id,access_token))
 
     reactions = getReactionsForStatus(status_id, access_token) if \
             status_published > '2016-02-24 00:00:00' else {}
