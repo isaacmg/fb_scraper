@@ -81,7 +81,7 @@ class MyTest(unittest.TestCase):
         s = serialize(testList)
         self.assertEqual(get_as_json(testList), deserialize(s))
     def test_reaction_id(self):
-        status_id = ""
+        status_id = "457628327745071_759994330841801"
         access_token = "354322838020934|" + os.environ['FB_KEY2']
         self.assertEqual(get_reaction_ids(status_id,access_token), {'paging': {'cursors': {'after': 'TVRNeU1EVXpORFF6TURveE5EZAzVOelkxTnpVeU9qSTFOREE1TmpFMk1UTT0ZD', 'before': 'TVRRMk16WTFNak16TnpveE5EZAzVPVGMwT1RjMU9qSTFOREE1TmpFMk1UTT0ZD'}}, 'data': [{'type': 'LIKE', 'id': '10208663896982524'}, {'type': 'LIKE', 'id': '102107'}]})
 
