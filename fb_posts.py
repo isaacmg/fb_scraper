@@ -4,6 +4,7 @@ import datetime
 import csv
 import time
 from fb_posts_realtime import init_kafka, send_message
+from fb_comments_page import scrapeFacebookPageFeedComments
 class FB_SCRAPE(object):
     def __init__(self, useKafka, useES, useSQL, outputJSON):
         self.producer = None
@@ -12,6 +13,9 @@ class FB_SCRAPE(object):
         self.ES = useES
         self.useSQL = useSQL
         self.JSON = outputJSON
+        self.file_id = ""
+        self.access_token = ""
+        self.tstamp = ""
 
     def request_until_succeed(self, url):
         req = urllib.request.Request(url)
@@ -162,6 +166,9 @@ class FB_SCRAPE(object):
                 num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
 
     def scrapeFacebookPageFeedStatus2(self, page_id, access_token, tStamp):
+        self.file_id = page_id
+        self.access_token = access_token
+        self.tstamp = tStamp
 
         with open('data/files/%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
             w = csv.writer(file)
@@ -205,3 +212,5 @@ class FB_SCRAPE(object):
 
             print("\nDone!\n%s Statuses Processed in %s" % \
                 (num_processed, datetime.datetime.now() - scrape_starttime))
+    def scrapeComments(self):
+        scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp)

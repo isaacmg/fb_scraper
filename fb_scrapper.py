@@ -58,8 +58,10 @@ def scrape(page_id,tstamp, useKafka):
     access_token = get_access('app.txt')
     pageStamp = get_tstamp(page_id, tstamp, "save_times")
     save_shelve(page_id,'save_times')
-    scraper = FB_SCRAPE(useKafka,False, False, False)
+    scraper = FB_SCRAPE(useKafka, False, False, False)
     scraper.scrapeFacebookPageFeedStatus2( page_id, access_token, pageStamp)
+    if os.environ.get("COMMENTS") is not None:
+        scraper.scrapeComments()
 
 
 
