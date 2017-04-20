@@ -76,8 +76,8 @@ class MyTest(unittest.TestCase):
         self.assertEqual(processFacebookComment(comment,"176485839144245_1108023245990495",''),('1108028642656622', '176485839144245_1108023245990495', '', b'Sweet Thanks', b'Jake Risch', '2017-02-24 16:32:02', 0))
     def test_groups_pages(self):
         group_id = "paddlesoft"
-        self.assertEqual(scrape_groups_pages(group_id, 0,  False), "Sucessfully scraped from 0 for page id paddlesoft")
-        self.assertEqual(scrape_groups_pages(group_id, 0, True), "Sucessfully scraped from 0 page id paddlesoft")
+        self.assertEqual(scrape_groups_pages(group_id, 0,  False), "Sucessfully scraped from 0for page id paddlesoft")
+        self.assertEqual(scrape_groups_pages(group_id, 0, True), "Sucessfully scraped from 0page id paddlesoft")
 
     def test_serialize(self):
         testList = ('115285708497149_1731636350195402', 'One-day special session, Northampton, MA YMCA.','Northampton Pool Rolling Session', 'event', 'https://www.facebook.com/events/319137738480268/','2017-01-09 18:51:17', 1, 0, 0, 1, 0, 0, 0, 0, 0)
