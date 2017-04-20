@@ -1,7 +1,6 @@
 import shelve
-from fb_posts import scrapeFacebookPageFeedStatus2
-from fb_posts_realtime import scrapeFacebookPageFeedStatus
-from fb_comments_page import scrapeFacebookPageFeedComments
+from fb_posts import FB_SCRAPE
+
 import time
 import os
 
@@ -10,11 +9,9 @@ import os
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
 # To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
 # To do create unit tests to make sure it runs.
-def scrape_groups_pages(page_id, from_time, function_number, comments):
-    funcs = [scrapeFacebookPageFeedStatus,scrapeFacebookPageFeedStatus2, scrapeFacebookPageFeedComments]
-    scrape(page_id, from_time, funcs[function_number], comments)
-    print("Sucessfully scraped from " + str(from_time) + " " + funcs[function_number].__name__ + "for page id " + str(page_id))
-    return "Sucessfully scraped from " + str(from_time) + " " + funcs[function_number].__name__ + "for page id " + str(page_id)
+def scrape_groups_pages(page_id, from_time, useKafka):
+    scrape(page_id, from_time, useKafka)
+    return "Sucessfully scraped from " + str(from_time) + " + " "for page id " + str(page_id)
 
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):
@@ -57,15 +54,13 @@ def get_access(path):
     return access_token
 
 
-def scrape(page_id,tstamp,scrape_func, comments):
+def scrape(page_id,tstamp, useKafka):
     access_token = get_access('app.txt')
-    if comments:
-        pageStamp = get_tstamp(page_id + "_comments", tstamp, "save_times")
-        save_shelve(page_id + "_comments", 'save_times')
-    else:
-        pageStamp = get_tstamp(page_id, tstamp, "save_times")
-        save_shelve(page_id,'save_times')
-    scrape_func(page_id, access_token, pageStamp)
+    pageStamp = get_tstamp(page_id, tstamp, "save_times")
+    save_shelve(page_id,'save_times')
+    scraper = FB_SCRAPE(useKafka,False, False, False)
+    scraper.scrapeFacebookPageFeedStatus2( page_id, access_token, pageStamp)
+
 
 
 

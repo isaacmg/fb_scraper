@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access, scrape_groups_pages
-from fb_posts import getFacebookPageFeedData, processFacebookPageFeedStatus, getReactionsForStatus, get_reaction_ids
+from fb_posts import FB_SCRAPE
 from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
 from fb_posts_realtime import serialize
 from kafka_test import deserialize
@@ -40,21 +40,24 @@ class MyTest(unittest.TestCase):
         self.assertEqual(get_access('data/files/text.txt'),"999999999|awerqwerdummytext")
     def test_getFacebookPageFeedData(self):
         access = "238791666290359|" + os.environ['FB_KEY']
-        data = getFacebookPageFeedData("paddlesoft", access, 100, 0 )
+        a = FB_SCRAPE(False, False, False, False)
+        data = a.getFacebookPageFeedData("paddlesoft", access, 100, 0 )
         if("message" in data["data"][0]):
             good = 1
         else:
             good = 2
         self.assertEqual(good,1)
     def test_procesFacebookPageFeedStatus(self):
+        a2 = FB_SCRAPE(False, False, False, False)
         a ={'message': 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', 'from':{'id': '55', 'name':'somename'}, 'comments': {'summary': {'can_comment': False, 'total_count': 1, 'order': 'chronological'}, 'data': []}, 'reactions': {'summary': {'total_count': 0, 'viewer_reaction': 'NONE'}, 'data': []}, 'created_time': '2017-02-03T13:55:35+0000', 'type': 'status', 'id': '115285708497149_1769803846378652'}
         access = "238791666290359|" + os.environ['FB_KEY']
-        self.assertEqual(processFacebookPageFeedStatus(a,access), ('115285708497149_1769803846378652', '55', 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', '', 'status', '', '2017-02-03 08:55:35', 0, 1, 0, 0, 0, 0, 0, 0, 0))
+        self.assertEqual(a2.processFacebookPageFeedStatus(a,access), ('115285708497149_1769803846378652', '55', 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', '', 'status', '', '2017-02-03 08:55:35', 0, 1, 0, 0, 0, 0, 0, 0, 0))
     def test_getReactionsForStatus(self):
+        a = FB_SCRAPE(False, False, False, False)
         access = "238791666290359|" + os.environ['FB_KEY']
         status_id = "115285708497149_1700908723268165"
-        print(getReactionsForStatus(status_id, access))
-        self.assertEquals(getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
+        print(a.getReactionsForStatus(status_id, access))
+        self.assertEquals(a.getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
     def test_getFacebookCommentFeedData(self):
         access_token = "238791666290359|" + os.environ['FB_KEY']
         data = {'paging': {
@@ -73,17 +76,18 @@ class MyTest(unittest.TestCase):
         self.assertEqual(processFacebookComment(comment,"176485839144245_1108023245990495",''),('1108028642656622', '176485839144245_1108023245990495', '', b'Sweet Thanks', b'Jake Risch', '2017-02-24 16:32:02', 0))
     def test_groups_pages(self):
         group_id = "paddlesoft"
-        self.assertEqual(scrape_groups_pages(group_id, 0, 1,  False), "Sucessfully scraped from 0 scrapeFacebookPageFeedStatus2for page id paddlesoft")
-        self.assertEqual(scrape_groups_pages(group_id, 0, 2, True), "Sucessfully scraped from 0 scrapeFacebookPageFeedCommentsfor page id paddlesoft")
+        self.assertEqual(scrape_groups_pages(group_id, 0, 1,  False), "Sucessfully scraped from 0 for page id paddlesoft")
+        self.assertEqual(scrape_groups_pages(group_id, 0, 2, True), "Sucessfully scraped from 0 page id paddlesoft")
 
     def test_serialize(self):
         testList = ('115285708497149_1731636350195402', 'One-day special session, Northampton, MA YMCA.','Northampton Pool Rolling Session', 'event', 'https://www.facebook.com/events/319137738480268/','2017-01-09 18:51:17', 1, 0, 0, 1, 0, 0, 0, 0, 0)
         s = serialize(testList)
         self.assertEqual(get_as_json(testList), deserialize(s))
     def test_reaction_id(self):
-        status_id = "457628327745071_759994330841801"
+        scraper = FB_SCRAPE(False, False, False, False)
+        status_id = "457628327745071_746174208890480"
         access_token = "354322838020934|" + os.environ['FB_KEY2']
-        self.assertEqual(get_reaction_ids(status_id,access_token), {"paging": {"cursors": {"after": "TVRNeU1EVXpORFF6TURveE5EZAzVOelkxTnpVeU9qSTFOREE1TmpFMk1UTT0ZD", "before": "TVRRMk16WTFNak16TnpveE5EZAzVPVGMwT1RjMU9qSTFOREE1TmpFMk1UTT0ZD"}}, "data": [{"id": "10208663896982524", "type": "LIKE"}, {"id": "10210777661820553", "type": "LIKE"}]})
+        self.assertEqual(scraper.get_reaction_ids(status_id,access_token), {"paging": {"cursors": {"after": "TlRneU1qTXdORG94TkRnM05qUTBOell3T2pJMU5EQTVOakUyTVRNPQZDZD", "before": "TlRneU1qTXdORG94TkRnM05qUTBOell3T2pJMU5EQTVOakUyTVRNPQZDZD"}}, "data": [{"id": "10103915113063889", "type": "LIKE"}]})
 
 
 

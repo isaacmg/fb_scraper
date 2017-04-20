@@ -23,7 +23,7 @@ def process_data():
          data = workQueue.get()
          queueLock.release()
          full_scrape, use_kafka = get_scrape_type()
-         scrape_groups_pages(data, full_scrape, use_kafka, False)
+         scrape_groups_pages(data, full_scrape, use_kafka)
          if "COMMENTS" in os.environ:
              scrape_groups_pages(data, 0, 2, True)
       else:
@@ -57,9 +57,9 @@ def init_queue(nameList):
 def get_scrape_type():
     # Somewhat backwards but for kafka one is false and 0 is true
     # By default do not use Kafka
-    use_kafka = 1
+    use_kafka = False
     if "USE_KAFKA" in os.environ:
-        use_kafka =0
+        use_kafka =True
     # By default only scrape since last time stamp
     full_scrape = 1
     if "FULL_SCRAPE" in os.environ:
