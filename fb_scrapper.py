@@ -11,7 +11,7 @@ import os
 # To do create unit tests to make sure it runs.
 def scrape_groups_pages(page_id, from_time, useKafka):
     scrape(page_id, from_time, useKafka)
-    return "Sucessfully scraped from " + str(from_time) + " + " "for page id " + str(page_id)
+    return "Sucessfully scraped from " + str(from_time) + "for page id " + str(page_id)
 
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):
