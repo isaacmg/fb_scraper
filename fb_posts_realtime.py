@@ -1,8 +1,4 @@
-import urllib.request
-import json
-import datetime
-import csv
-import time
+
 from kafka import KafkaProducer
 
 def init_kafka(port):

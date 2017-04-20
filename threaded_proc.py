@@ -24,8 +24,7 @@ def process_data():
          queueLock.release()
          full_scrape, use_kafka = get_scrape_type()
          scrape_groups_pages(data, full_scrape, use_kafka)
-         if "COMMENTS" in os.environ:
-             scrape_groups_pages(data, 0, 2, True)
+
       else:
          queueLock.release()
          time.sleep(1)
