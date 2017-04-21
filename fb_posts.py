@@ -18,7 +18,7 @@ class FB_SCRAPE(object):
         self.file_id = ""
         self.access_token = ""
         self.tstamp = ""
-        self.sesh = strftime("%Y-%m-%d%H-%M-%S", gmtime())
+        self.sesh = strftime("%Y-%m-%d%H", gmtime())
         self.dir = "data/files/" + self.sesh + "/"
 
         if not os.path.exists(self.dir):
@@ -177,7 +177,7 @@ class FB_SCRAPE(object):
         self.access_token = access_token
         self.tstamp = tStamp
 
-        with open(self.dir + '%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
+        with open(self.dir + str(self.tstamp) + '%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
             w = csv.writer(file)
             w.writerow(["status_id", "from_id", "status_message", "link_name", "status_type",
                         "status_link", "status_published", "num_reactions",
