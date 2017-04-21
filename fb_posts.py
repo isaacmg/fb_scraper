@@ -3,6 +3,8 @@ import json
 import datetime
 import csv
 import time
+import os
+from time import gmtime, strftime
 from fb_posts_realtime import init_kafka, send_message
 from fb_comments_page import scrapeFacebookPageFeedComments
 class FB_SCRAPE(object):
@@ -16,6 +18,11 @@ class FB_SCRAPE(object):
         self.file_id = ""
         self.access_token = ""
         self.tstamp = ""
+        self.sesh = strftime("%Y-%m-%d%H-%M-%S", gmtime())
+        self.dir = "data/files/" + self.sesh + "/"
+
+        if not os.path.exists(self.dir):
+            os.makedirs(self.dir)
 
     def request_until_succeed(self, url):
         req = urllib.request.Request(url)
@@ -88,10 +95,8 @@ class FB_SCRAPE(object):
                     "id,type"
         url = base + node + reactions + parameters
         data = json.loads(self.request_until_succeed(url))
-        # For now I'm just saving
 
-        with open("data/files/" + status_id +".txt", 'w') as f:
-            json.dump(data, f, ensure_ascii=False)
+
         return data
 
     def processFacebookPageFeedStatus(self,status, access_token):
@@ -101,8 +106,8 @@ class FB_SCRAPE(object):
 
         # Additionally, some items may not always exist,
         # so must check for existence first
-
         status_id = status['id']
+        status['reacts'] = self.get_reaction_ids(status_id, access_token)
         from_id = status['from']['id']
         status_message = '' if 'message' not in status.keys() else \
                 self.unicode_normalize(status['message'])
@@ -158,9 +163,11 @@ class FB_SCRAPE(object):
         num_hahas = get_num_total_reactions('haha', reactions)
         num_sads = get_num_total_reactions('sad', reactions)
         num_angrys = get_num_total_reactions('angry', reactions)
+        # Save the JSON file
+        with open(self.dir + status_id + ".json", 'w') as f:
+            json.dump(status, f, ensure_ascii=False)
 
         # Return a tuple of all processed data
-
         return (status_id, from_id, status_message, link_name, status_type, status_link,
                 status_published, num_reactions, num_comments, num_shares,
                 num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
@@ -170,7 +177,7 @@ class FB_SCRAPE(object):
         self.access_token = access_token
         self.tstamp = tStamp
 
-        with open('data/files/%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
+        with open(self.dir + '%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
             w = csv.writer(file)
             w.writerow(["status_id", "from_id", "status_message", "link_name", "status_type",
                         "status_link", "status_published", "num_reactions",

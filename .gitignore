@@ -66,3 +66,4 @@ spark-warehouse
 .iml
 *.idea
 *.txt
+*.json
