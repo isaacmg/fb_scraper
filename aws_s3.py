@@ -1,7 +1,11 @@
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 import os
+import shutil
+def clear_all():
 
+    shutil.rmtree('data/files')
+    os.makedirs('data/files')
 def init_s3():
     #REGION_HOST = 's3.us-east-2.amazonaws.com'
     REGION_HOST = os.environ["AWS_REGION"]
@@ -14,7 +18,3 @@ def init_s3():
             k.set_contents_from_filename(os.path.join("data/files/", file))
     clear_all()
 
-def clear_all():
-    import shutil
-    shutil.rmtree('data/files')
-    os.makedirs('data/files')
