@@ -9,7 +9,7 @@ steps:
     - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S
 
   perform_tests:
-    image_name: isaacmg/fb_scraper go:onbuild
+    image_name: isaacmg/fb_scraper 
     working_directory: ${{main_clone}}
     description: Performing unit tests...
     commands:
