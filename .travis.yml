@@ -7,7 +7,7 @@ services:
   
 install:
   - pip install -r requirements.txt
-  - ./start_kafk.sh
+  - /home/travis/build/isaacmg/fb_scraper/kafk.sh
 script:
   - coverage run tests/fb_posts_test.py
 after_success:
