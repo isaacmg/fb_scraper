@@ -106,7 +106,9 @@ class FB_SCRAPE(object):
 
         # Additionally, some items may not always exist,
         # so must check for existence first
+
         status_id = status['id']
+        status["group_id"] = self.file_id
         status['reacts'] = self.get_reaction_ids(status_id, access_token)
         from_id = status['from']['id']
         status_message = '' if 'message' not in status.keys() else \
