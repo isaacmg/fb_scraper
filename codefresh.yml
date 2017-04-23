@@ -1,12 +1,4 @@
-
-
-  perform_tests:
-    image_name: isaacmg/fb_scraper 
-    working_directory: ${{main_clone}}
-    description: Performing unit tests...
-    commands:
-      - python threaded_proc.py 
-     version: '1.0'
+version: '1.0'
 steps:
   BuildingDockerImage:
     title: Building Docker Image
