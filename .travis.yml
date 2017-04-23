@@ -2,10 +2,13 @@ language: python
 python:
   - "3.5"
 cache: pip
+services:
+  - docker
+before_install:
+  - ./start_kafka 
 install:
   - pip install -r requirements.txt
 script:
   - coverage run tests/fb_posts_test.py
-  
 after_success:
   - codecov
