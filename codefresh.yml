@@ -1,0 +1,17 @@
+version: '1.0'
+steps:
+  build_image:
+    type: build
+    description: Building the image...
+    image-name: isaacmg/fb_scraper
+    tag: develop # ${{CF_BRANCH}}
+    build-arguments:
+    - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S
+
+  perform_tests:
+    image_name:  go:onbuild
+    working_directory: ${{main_clone}}
+    description: Performing unit tests...
+    commands:
+      - python threaded_proc.py 
+     
