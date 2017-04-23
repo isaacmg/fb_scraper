@@ -1,12 +1,4 @@
-version: '1.0'
-steps:
-  build_image:
-    type: build
-    description: Building the image...
-    image-name: isaacmg/fb_scraper
-    tag: develop # ${{CF_BRANCH}}
-    build-arguments:
-    - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S
+
 
   perform_tests:
     image_name: isaacmg/fb_scraper 
@@ -14,4 +6,49 @@ steps:
     description: Performing unit tests...
     commands:
       - python threaded_proc.py 
-     
+     version: '1.0'
+steps:
+  BuildingDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: isaacmg/fb_scraper
+    working_directory: ./
+    dockerfile: Dockerfile
+    build-arguments:
+    - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S
+  RunningUnitTests:
+    title: Running Unit Tests
+    image: '${{BuildingDockerImage}}'
+    working_directory: IMAGE_WORK_DIR
+    entry_point:
+      - /bin/sh
+      - /codefresh/volume/cf-generated/unit_test_script
+    create_file:
+      path: /codefresh/volume/cf-generated
+      name: unit_test_script
+      content: >-
+        # This bash script is executed within a freshly created docker container
+        that's derived from the image that you build. This means that on top
+        your code, all tools and resources that are provided by the image you
+        build are available to this script.
+
+
+        # Here's the place to execute commands that unit test your code and your
+        resources.
+
+
+        # The exit code of your script determines the outcome of the test;
+        Exiting with status code 0 will result in success, while exiting with
+        code 1 and above will result in a failure.
+
+        python threaded_proc.py
+    on_success:
+      metadata:
+        set:
+          - '${{BuildingDockerImage.imageId}}':
+              - CF_QUALITY: true
+    on_fail:
+      metadata:
+        set:
+          - '${{BuildingDockerImage.imageId}}':
+              - CF_QUALITY: false
