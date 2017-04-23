@@ -4,10 +4,10 @@ python:
 cache: pip
 services:
   - docker
-before_install:
-  - ./start_kafk.sh
+  
 install:
   - pip install -r requirements.txt
+  - ./start_kafk.sh
 script:
   - coverage run tests/fb_posts_test.py
 after_success:
