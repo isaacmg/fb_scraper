@@ -51,7 +51,7 @@ class MyTest(unittest.TestCase):
         a2 = FB_SCRAPE(False, False, False, False)
         a ={'message': 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', 'from':{'id': '55', 'name':'somename'}, 'comments': {'summary': {'can_comment': False, 'total_count': 1, 'order': 'chronological'}, 'data': []}, 'reactions': {'summary': {'total_count': 0, 'viewer_reaction': 'NONE'}, 'data': []}, 'created_time': '2017-02-03T13:55:35+0000', 'type': 'status', 'id': '115285708497149_1769803846378652'}
         access = "238791666290359|" + os.environ['FB_KEY']
-        self.assertEqual(a2.processFacebookPageFeedStatus(a,access), ('115285708497149_1769803846378652', '55', 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', '', 'status', '', '2017-02-03 08:55:35', 0, 1, 0, 0, 0, 0, 0, 0, 0))
+        self.assertEqual(a2.processFacebookPageFeedStatus(a,access), ('55', 'I may have the opportunity to get a wavehopper.  the specs say 210 lbs max but it is a really big boat.  has anyone here tried putting more weight than that in it?', '', 'status', '', '2017-02-03 08:55:35', 0, 1, 0, 0, 0, 0, 0, 0, 0, '115285708497149_1769803846378652'))
     def test_getReactionsForStatus(self):
         a = FB_SCRAPE(False, False, False, False)
         access = "238791666290359|" + os.environ['FB_KEY']
