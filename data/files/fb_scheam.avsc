@@ -8,11 +8,12 @@
             {"name": "link_name", "type": "string"},
             {"name": "status_type", "type": "string"},
             {"name": "status_link", "type": "string"},
-            {"name": "status_published", "type": "string"}, 
+            {"name": "status_published", "type": "string"},
             {"name": "num_reactions", "type": "int"},
             {"name": "num_comments", "type": "int"},
             {"name": "num_shares", "type": "int"},
             {"name": "num_likes", "type": "int"},
-            {"name": "num_loves", "type": "int"}
+            {"name": "num_loves", "type": "int"},
+	        {"name": "from_id", "type": "string"}
         ]
     }

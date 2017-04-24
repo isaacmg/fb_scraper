@@ -11,7 +11,7 @@ class FB_SCRAPE(object):
     def __init__(self, useKafka, useES, useSQL, outputJSON):
         self.producer = None
         if useKafka:
-            self.producer = init_kafka("localhost:9092")
+            self.producer = init_kafka("192.168.99.100:9092")
         self.ES = useES
         self.useSQL = useSQL
         self.JSON = outputJSON
@@ -170,9 +170,9 @@ class FB_SCRAPE(object):
             json.dump(status, f, ensure_ascii=False)
 
         # Return a tuple of all processed data
-        return (status_id, from_id, status_message, link_name, status_type, status_link,
+        return (status_id, status_message, link_name, status_type, status_link,
                 status_published, num_reactions, num_comments, num_shares,
-                num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys)
+                num_likes, num_loves, num_wows, num_hahas, num_sads, num_angrys, from_id)
 
     def scrapeFacebookPageFeedStatus2(self, page_id, access_token, tStamp):
         self.file_id = page_id
@@ -181,10 +181,10 @@ class FB_SCRAPE(object):
 
         with open(self.dir + str(self.tstamp) + '%s_facebook_statuses.csv' % page_id, 'w', newline='',encoding='utf-8') as file:
             w = csv.writer(file)
-            w.writerow(["status_id", "from_id", "status_message", "link_name", "status_type",
+            w.writerow(["status_id", "status_message", "link_name", "status_type",
                         "status_link", "status_published", "num_reactions",
                         "num_comments", "num_shares", "num_likes", "num_loves",
-                        "num_wows", "num_hahas", "num_sads", "num_angrys"])
+                        "num_wows", "num_hahas", "num_sads", "num_angrys", "from_id"])
 
             has_next_page = True
             num_processed = 0   # keep a count on how many we've processed
@@ -202,7 +202,7 @@ class FB_SCRAPE(object):
                         data = self.processFacebookPageFeedStatus(status, access_token)
                         w.writerow(data)
                         if self.producer is not None:
-                            send_message(self.producer, status, page_id)
+                            send_message(self.producer, data, page_id)
 
                     # output progress occasionally to make sure code is not
                     # stalling

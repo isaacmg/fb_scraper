@@ -92,4 +92,3 @@ if os.environ["USE_AWS"] is "1":
     init_s3()
     print("files saved to AWS2")
 # Add other connectors
-

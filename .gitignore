@@ -67,3 +67,5 @@ spark-warehouse
 *.idea
 *.txt
 *.json
+
+kafka-docker/
