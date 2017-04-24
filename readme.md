@@ -10,7 +10,8 @@ The goal of this project is to implement a Facebook scraping and extraction engi
 
 To get the ID of a Facebook group go [here](https://lookup-id.com) and input the url of the page or group you are trying to scrape.
 
-For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image)
+For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above.
+
 ### You will need to have Python 3.5+. If you want to use the examples you will need Jupyter Notebooks and Spark.
 
 1. Create a file called app.txt and place your app_id in it along with your app_secret.
@@ -22,12 +23,12 @@ group_id = "115285708497149"
 scrape_posts_from_last_scrape(group_id)
 scrape_comments_from_last_scrape(group_id)
 ```
-3. Note that our messaging system using Kafka is very experimental and there are currently no tests so use at your own risk.
+3. Note that our messaging system using Kafka is currently broken as we generate a new Avro schema [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11). You can still edit the section of fb_posts.py to pass the old post instead (or use your own serialization method). Of course, any help on this would be appreciated as it is currently a blocker on many other things.
 
-4. Currently the majority of examples are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV or import the scraper.
+4. Currently the majority of examples of actual analysis are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV.
 
-5. Run through the notebook and make any changes/additions you want. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them since they are mainly in Java and require Apache Flink.
+5. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them from this repo since they are mainly in Java and require Apache Flink.
 
-6. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder, however they are currently raising file directory errors.
+6. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder. It is reccomended that you use the dags in conjunction with our Docker image. This will avoid directory errors.
 
 ### Scrape away!
