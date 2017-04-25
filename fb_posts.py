@@ -11,7 +11,7 @@ class FB_SCRAPE(object):
     def __init__(self, useKafka, useES, useSQL, outputJSON):
         self.producer = None
         if useKafka:
-            self.producer = init_kafka("192.168.99.100:9092")
+            self.producer = init_kafka(os.environ['KAFKA_PORT'])
         self.ES = useES
         self.useSQL = useSQL
         self.JSON = outputJSON

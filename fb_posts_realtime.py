@@ -12,7 +12,7 @@ def get_as_json(items):
      "num_shares": items[8], "num_likes": items[9], "num_loves": items[10], "from_id": items[11]}
     return message
 
-# TODO move serilization schema to file
+
 
 def serialize(items):
     from avro import schema, io
@@ -27,7 +27,6 @@ def serialize(items):
     print(get_as_json(items))
     writer.write(get_as_json(items), encoder)
     raw_bytes = bytes_writer.getvalue()
-
     return raw_bytes
 
 def send_message(producer, message, page_id):
