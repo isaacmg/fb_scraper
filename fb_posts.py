@@ -36,7 +36,7 @@ class FB_SCRAPE(object):
                 print(e)
                 time.sleep(5)
 
-                print("Error for URL %s: %s" % (url, datetime.datetime.now()))
+                #print("Error for URL %s: %s" % (url, datetime.datetime.now()))
                 print("Retrying.")
 
         return response.read().decode(response.headers.get_content_charset())
