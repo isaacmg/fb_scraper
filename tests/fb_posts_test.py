@@ -6,17 +6,12 @@ import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access, scrape_groups_pages
 from fb_posts import FB_SCRAPE
 from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
-from fb_posts_realtime import serialize
+from fb_posts_realtime import serialize, get_as_json
 from kafka_test import deserialize
 
 
 
-def get_as_json( items):
-    message = {"status_id": items[0], "status_message": items[1], "link_name": items[2], "status_type": items[3],
-               "status_link": items[4], "status_published": items[5], "num_reactions": items[6],
-               "num_comments": items[7],
-               "num_shares": items[8], "num_likes": items[9], "num_loves": items[10]}
-    return message
+
 
 def test_func(page_id,d):
     if page_id in d:
