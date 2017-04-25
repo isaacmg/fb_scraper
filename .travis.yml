@@ -11,6 +11,6 @@ install:
   - $TRAVIS_BUILD_DIR/build_kafk.sh
 script:
   - coverage run tests/fb_posts_test.py
-  - python integrations_tests.py 
+  - python tests/integrations_tests.py
 after_success:
   - codecov
