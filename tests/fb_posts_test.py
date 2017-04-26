@@ -55,6 +55,7 @@ class MyTest(unittest.TestCase):
         self.assertEquals(a.getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 6}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
     def test_getFacebookCommentFeedData(self):
         access_token = os.environ['FB_ID'] + "|" + os.environ['FB_KEY']
+        print(getFacebookCommentFeedData("176485839144245_1128860933906726", access_token, 100, -2180131200))
         data = {'paging': {
             'cursors': {'after': 'WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEV6T0RFMU9ERXhNamszTnpBd09Eb3hORGt3TlRreU9UQTUZD',
                         'before': 'WTI5dGJXVnVkRjlqZAFhKemIzSTZANVEV6TkRNeE5qa3lNek0yTVRFeU56b3hORGt3TWpJM05qUXkZD'}},
