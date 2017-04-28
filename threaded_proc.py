@@ -23,8 +23,8 @@ def process_data():
       if not workQueue.empty():
          data = workQueue.get()
          queueLock.release()
-         full_scrape, use_kafka = get_scrape_type()
-         scrape_groups_pages(data, full_scrape, use_kafka, False)
+         full_scrape, use_kafka use_es = get_scrape_type()
+         scrape_groups_pages(data, full_scrape, use_kafka, use_es)
 
       else:
          queueLock.release()
@@ -65,7 +65,12 @@ def get_scrape_type():
     if "FULL_SCRAPE" in os.environ:
         if os.environ['FULL_SCRAPE'] is "0":
             full_scrape = 0
-    return full_scrape, use_kafka
+    use_es = False
+    if "ES" in os.environ:
+        use_es = True
+
+
+    return full_scrape, use_kafka, use_es
 
 
 threadList = ["Thread-1", "Thread-2", "Thread-3"]
