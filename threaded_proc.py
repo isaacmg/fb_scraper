@@ -24,7 +24,7 @@ def process_data():
          data = workQueue.get()
          queueLock.release()
          full_scrape, use_kafka = get_scrape_type()
-         scrape_groups_pages(data, full_scrape, use_kafka)
+         scrape_groups_pages(data, full_scrape, use_kafka, False)
 
       else:
          queueLock.release()

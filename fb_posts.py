@@ -170,7 +170,7 @@ class FB_SCRAPE(object):
         num_sads = get_num_total_reactions('sad', reactions)
         num_angrys = get_num_total_reactions('angry', reactions)
         # Use ES
-        if self.es not None:
+        if self.es is not None:
             index_res(self.es, status_id, status)
         # Save the JSON file
         with open(self.dir + status_id + ".json", 'w') as f:

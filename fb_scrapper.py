@@ -9,8 +9,8 @@ import os
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
 # To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
 # To do create unit tests to make sure it runs.
-def scrape_groups_pages(page_id, from_time, useKafka):
-    scrape(page_id, from_time, useKafka)
+def scrape_groups_pages(page_id, from_time, useKafka, useES):
+    scrape(page_id, from_time, useKafka, useES)
     return "Sucessfully scraped from " + str(from_time) + "for page id " + str(page_id)
 
 # Get to time scrape from
@@ -54,11 +54,11 @@ def get_access(path):
     return access_token
 
 
-def scrape(page_id,tstamp, useKafka):
+def scrape(page_id,tstamp, useKafka, useES):
     access_token = get_access('app.txt')
     pageStamp = get_tstamp(page_id, tstamp, "save_times")
     save_shelve(page_id,'save_times')
-    scraper = FB_SCRAPE(useKafka, False, False, False)
+    scraper = FB_SCRAPE(useKafka, useES, False, False)
     scraper.scrapeFacebookPageFeedStatus2( page_id, access_token, pageStamp)
     if os.environ.get("COMMENTS") is not None:
         scraper.scrapeComments()
