@@ -23,7 +23,7 @@ def process_data():
       if not workQueue.empty():
          data = workQueue.get()
          queueLock.release()
-         full_scrape, use_kafka use_es = get_scrape_type()
+         full_scrape, use_kafka, use_es = get_scrape_type()
          scrape_groups_pages(data, full_scrape, use_kafka, use_es)
 
       else:
