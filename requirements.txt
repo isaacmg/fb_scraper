@@ -2,3 +2,5 @@ kafka
 avro-python3
 codecov
 coverage
+elasticsearch
+requests_aws4auth

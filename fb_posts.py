@@ -7,11 +7,15 @@ import os
 from time import gmtime, strftime
 from fb_posts_realtime import init_kafka, send_message
 from fb_comments_page import scrapeFacebookPageFeedComments
+from run_es import init_es, index_res
 class FB_SCRAPE(object):
     def __init__(self, useKafka, useES, useSQL, outputJSON):
         self.producer = None
+        self.es = None
         if useKafka:
             self.producer = init_kafka(os.environ['KAFKA_PORT'])
+        if useES:
+            self.es = init_es()
         self.ES = useES
         self.useSQL = useSQL
         self.JSON = outputJSON
@@ -165,9 +169,13 @@ class FB_SCRAPE(object):
         num_hahas = get_num_total_reactions('haha', reactions)
         num_sads = get_num_total_reactions('sad', reactions)
         num_angrys = get_num_total_reactions('angry', reactions)
+        # Use ES
+        if self.es not None:
+            index_res(self.es, status_id, status)
         # Save the JSON file
         with open(self.dir + status_id + ".json", 'w') as f:
             json.dump(status, f, ensure_ascii=False)
+
 
         # Return a tuple of all processed data
         return (status_id, status_message, link_name, status_type, status_link,

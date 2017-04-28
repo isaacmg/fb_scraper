@@ -13,5 +13,5 @@ def init_es():
         connection_class=RequestsHttpConnection
     )
     return es
-def index_res(es, index_name, status_id, status_data):
-    es.index(index=index_name, doc_type='fb_post', id=status_id, body=status_data)
+def index_res(es, status_id, status_data):
+    es.index(index=os.environ['INDEX_NAME'], doc_type='fb_post', id=status_id, body=status_data)
