@@ -17,5 +17,5 @@ dag = DAG('run_facebook', start_date = d, schedule_interval = '10 * * * *', defa
 t_main = BashOperator(
     task_id = 'fb_scrape'
   , dag = dag
-  , bash_command = 'docker run --env-file /path_to_file/variables.list paddlesoft/fb-scraping'
+  , bash_command = 'docker run --env-file /path_to_file/variables.list paddlesoft/fb_scraper'
   )
