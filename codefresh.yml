@@ -7,7 +7,7 @@ steps:
     working_directory: ./
     dockerfile: Dockerfile
     build-arguments:
-    - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S
+    - CACHE_DATE=$(date +%Y-%m-%d:%H:%M:%S)
   RunningUnitTests:
     title: Running Unit Tests
     image: '${{BuildingDockerImage}}'
