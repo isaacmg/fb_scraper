@@ -23,12 +23,15 @@ group_id = "115285708497149"
 scrape_posts_from_last_scrape(group_id)
 scrape_comments_from_last_scrape(group_id)
 ```
-3. Note that our messaging system using Kafka is currently broken as we generate a new Avro schema [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11). You can still edit the section of fb_posts.py to pass the old post instead (or use your own serialization method). Of course, any help on this would be appreciated as it is currently a blocker on many other things.
+3. Note that our messaging system using Kafka currently only works with the basic json data (comparable to the CSV). We our working on addeding a new schema for the more complex data [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11).  Plans to upgrade add authentication for Kafka authentication our in progress.
 
 4. Currently the majority of examples of actual analysis are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV.
 
-5. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them from this repo since they are mainly in Java and require Apache Flink.
+5. ElasticSearch is ocassionally throwing an authentication error when to trying to save posts. If you get an authentication error when using ES please added it to [issue 16](https://github.com/isaacmg/fb_scraper/issues/12). Ability to connect to Bonsai and elastic.co are in the works.
 
-6. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder. It is reccomended that you use the dags in conjunction with our Docker image. This will avoid directory errors.
+6. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them from this repo since they are mainly in Java and require Apache Flink.
+
+7. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder. It is reccomended that you use the dags in conjunction with our Docker image. This will avoid directory errors.
+
 
 ### Scrape away!
