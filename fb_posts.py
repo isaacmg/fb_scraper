@@ -22,7 +22,7 @@ class FB_SCRAPE(object):
         self.file_id = ""
         self.access_token = ""
         self.tstamp = ""
-        self.sesh = strftime("%Y-%m-%d%H", gmtime())
+        self.sesh = strftime("%Y-%m-%d-%H", gmtime())
         self.dir = "data/files/" + self.sesh + "/"
 
         if not os.path.exists(self.dir):
@@ -230,4 +230,4 @@ class FB_SCRAPE(object):
             print("\nDone!\n%s Statuses Processed in %s" % \
                 (num_processed, datetime.datetime.now() - scrape_starttime))
     def scrapeComments(self):
-        scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp)
+        scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.sesh)

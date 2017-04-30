@@ -15,4 +15,6 @@ def init_es():
     )
     return es
 def index_res(es, status_id, status_data):
+    print("Now saving the result")
+    print(status_data)
     es.index(index=os.environ['INDEX_NAME'], doc_type='fb_post', id=status_id, body=status_data)
