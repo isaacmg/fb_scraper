@@ -8,6 +8,7 @@ from fb_posts import FB_SCRAPE
 from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
 from fb_posts_realtime import serialize, get_as_json, init_kafka
 from kafka_test import deserialize
+from run_es import init_es
 
 
 
@@ -91,6 +92,11 @@ class MyTest(unittest.TestCase):
         init_kafka("localhost:9092")
         # Kafka is running properly on Travis-CI if this doesn't fail
         self.assertEqual(1,1)
+    def test_run_es(self):
+        init_es()
+        # TODO IMPLEMENT Object comparision test
+        self.assertEqual(1,1)
+
 
 
 
