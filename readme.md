@@ -27,11 +27,11 @@ group_id = "115285708497149"
 scrape_posts_from_last_scrape(group_id)
 scrape_comments_from_last_scrape(group_id)
 ```
-3. Note that our messaging system using Kafka currently only works with the basic json data (comparable to the CSV). We our working on addeding a new schema for the more complex data [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11).  Plans to upgrade add authentication for Kafka authentication our in progress.
+3. Note that our messaging system using Kafka currently only works with the basic json data (comparable to the CSV). We our working on addeding a new schema for the more complex data [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11).  Plans to upgrade to add authentication for Kafka authentication are in progress.
 
 4. Currently the majority of examples of actual analysis are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV.
 
-5. ElasticSearch is ocassionally throwing an authentication error when to trying to save posts. If you get an authentication error when using ES please added it to [issue 15](https://github.com/isaacmg/fb_scraper/issues/15). Ability to connect to Bonsai and elastic.co are in the works.
+5. ElasticSearch is ocassionally throwing an authentication error when to trying to save posts. If you get an authentication error when using ES please add it to [issue 15](https://github.com/isaacmg/fb_scraper/issues/15). Ability to connect to Bonsai and elastic.co are in the works.
 
 6. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them from this repo since they are mainly in Java and require Apache Flink.
 
