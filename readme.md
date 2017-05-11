@@ -1,10 +1,11 @@
 # FBLYZE: a Facebook page and group scraping and analysis system.
 
-[![Join the chat at https://gitter.im/fb_scraper/Lobby](https://badges.gitter.im/fb_scraper/Lobby.svg)](https://gitter.im/fb_scraper/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Travis](https://travis-ci.org/isaacmg/fb_scraper.svg?branch=master)](https://travis-ci.org/isaacmg/fb_scraper)
 [![Codecov branch](https://img.shields.io/codecov/c/github/isaacmg/fb_scraper.svg)](https://codecov.io/gh/isaacmg/fb_scraper)
-[![Code Health](https://landscape.io/github/isaacmg/fb_scraper/master/landscape.svg?style=flat)](https://landscape.io/github/isaacmg/fb_scraper/master)
 [![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=isaacmg&repoName=fb_scraper&branch=master&pipelineName=fb_scraper&accountName=isaacmg&type=cf-2)]( https://g.codefresh.io/repositories/isaacmg/fb_scraper/builds?filter=trigger:build;branch:master;service:58e3576497ef5f0100e617c8~fb_scraper)
+[![Join the chat at https://gitter.im/fb_scraper/Lobby](https://badges.gitter.im/fb_scraper/Lobby.svg)](https://gitter.im/fb_scraper/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Code Health](https://landscape.io/github/isaacmg/fb_scraper/master/landscape.svg?style=flat)](https://landscape.io/github/isaacmg/fb_scraper/master)
 
 [Getting started tutorial on Medium](https://medium.com/@paddlesoft/building-a-full-service-facebook-scraping-and-analysis-engine-e6b5e45e3ea3).
 
