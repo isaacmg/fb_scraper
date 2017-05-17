@@ -17,7 +17,6 @@ def get_as_json(items):
 def serialize(items):
     from avro import schema, io
     import io as io2
-
     schema_path = "data/files/fb_scheam.avsc"
     schema = schema.Parse(open(schema_path).read())
     writer = io.DatumWriter(schema)
@@ -31,8 +30,6 @@ def serialize(items):
 
 def send_message(producer, message, page_id):
     message_data = serialize(message)
-    print(message_data)
-    # Also make the key be the name of the facebook group for easy tracking
     my_str_as_bytes = str.encode(page_id)
     producer.send('fb', key=my_str_as_bytes, value=message_data)
     return "message sent"
