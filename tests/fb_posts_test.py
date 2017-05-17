@@ -94,17 +94,8 @@ class MyTest(unittest.TestCase):
         self.assertEqual(1,1)
     def test_run_es(self):
         init_es()
-        # TODO IMPLEMENT Object comparision test
+        # TODO IMPLEMENT object comparision test
         self.assertEqual(1,1)
-
-
-
-
-
-
-        #Fix timeout errors
-
-
 
 if __name__ == '__main__':
     unittest.main()

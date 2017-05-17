@@ -6,7 +6,7 @@ from time import strftime, gmtime
 
 def init_s3():
     start = strftime("%Y-%m-%d-%H", gmtime())
-    
+
     REGION_HOST = os.environ["AWS_REGION"]
     BUCKET_NAME = os.environ["BUCKET_NAME"]
     conn = S3Connection(os.environ['AWS_ID'], os.environ['AWS_SECRET'], host=REGION_HOST)
