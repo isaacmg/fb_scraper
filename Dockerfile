@@ -1,5 +1,5 @@
 FROM continuumio/anaconda3:latest
-RUN pip install python-kafka && \
+RUN pip install kafka-python && \
 pip install avro-python3 && \
 pip install elasticsearch && \
 pip install requests_aws4auth
