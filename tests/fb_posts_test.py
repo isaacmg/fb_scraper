@@ -99,7 +99,7 @@ class MyTest(unittest.TestCase):
         # TODO IMPLEMENT object comparision test
         self.assertEqual(1,1)
     def test_load_id_file(self):
-        self.assertEqual(load_id_file("junk_path"),['paddlesoft','9000','whitewate'])
+        self.assertEqual(load_id_file("junk_path"),['paddlesoft','115285708497149'])
     def test_get_scrape_type(self):
         self.assertEqual(get_scrape_type(),(1,False,False))
 

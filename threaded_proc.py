@@ -72,29 +72,33 @@ def get_scrape_type():
 
     return full_scrape, use_kafka, use_es
 
+def main():
+    threadList = ["Thread-1", "Thread-2", "Thread-3"]
+    nameList = load_id_file("id.txt")
+    queueLock = threading.Lock()
+    workQueue = init_queue(nameList)
 
-threadList = ["Thread-1", "Thread-2", "Thread-3"]
-nameList = load_id_file("id.txt")
-queueLock = threading.Lock()
-workQueue = init_queue(nameList)
+    # Create new threads
+    threads = start_threads(threadList)
 
-# Create new threads
-threads = start_threads(threadList)
+    # Wait for queue to empty
+    while not workQueue.empty():
+       pass
 
-# Wait for queue to empty
-while not workQueue.empty():
-   pass
+    # Notify threads it's time to exit
+    exitFlag = 1
 
-# Notify threads it's time to exit
-exitFlag = 1
+    # Wait for all threads to complete
+    for t in threads:
+       t.join()
+    print ("Exiting Main Thread")
 
-# Wait for all threads to complete
-for t in threads:
-   t.join()
-print ("Exiting Main Thread")
+    if os.environ["USE_AWS"] is "1":
+        from aws_s3 import init_s3
+        init_s3()
+        print("files saved to AWS2")
+    # Add other connectors
+    # my code here
 
-if os.environ["USE_AWS"] is "1":
-    from aws_s3 import init_s3
-    init_s3()
-    print("files saved to AWS2")
-# Add other connectors
+if __name__ == "__main__":
+    main()
