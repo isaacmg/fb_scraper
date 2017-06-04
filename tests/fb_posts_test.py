@@ -9,6 +9,7 @@ from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, 
 from fb_posts_realtime import serialize, get_as_json, init_kafka
 from kafka_test import deserialize
 from run_es import init_es
+from threaded_proc import get_scrape_type, load_id_file
 
 
 
@@ -97,6 +98,9 @@ class MyTest(unittest.TestCase):
         init_es()
         # TODO IMPLEMENT object comparision test
         self.assertEqual(1,1)
+    def test_load_id_file(self):
+        self.assertEqual(load_id_file("junk_path"),['paddlesoft'])
+
 
 if __name__ == '__main__':
     unittest.main()
