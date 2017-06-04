@@ -89,6 +89,7 @@ class MyTest(unittest.TestCase):
         access_token = "354322838020934|" + os.environ['FB_KEY']
         self.assertEqual(scraper.get_reaction_ids(status_id,access_token), {"paging": {"cursors": {"after": "TlRneU1qTXdORG94TkRnM05qUTBOell3T2pJMU5EQTVOakUyTVRNPQZDZD", "before": "TlRneU1qTXdORG94TkRnM05qUTBOell3T2pJMU5EQTVOakUyTVRNPQZDZD"}}, "data": [{"id": "10103915113063889", "type": "LIKE"}]})
     def test_reaction_init_kafka(self):
+        #TODO add test for remote client/w authentication
         init_kafka("localhost:9092")
         # Kafka is running properly on Travis-CI if this doesn't fail
         self.assertEqual(1,1)

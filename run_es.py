@@ -15,5 +15,5 @@ def init_es():
     )
     return es
 def index_res(es, status_id, status_data):
-    print("Now saving the result to ElasticSearch")
+    print("Now saving the result to ElasticSearch "  + str(status_id))
     es.index(index=os.environ['INDEX_NAME'], doc_type='fb_post', id=status_id, body=status_data)
