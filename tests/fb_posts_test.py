@@ -100,6 +100,9 @@ class MyTest(unittest.TestCase):
         self.assertEqual(1,1)
     def test_load_id_file(self):
         self.assertEqual(load_id_file("junk_path"),['paddlesoft'])
+    def test_get_scrape_type(self):
+        self.assertEqual(get_scrape_type(),(1,False,False,))
+
 
 
 if __name__ == '__main__':
