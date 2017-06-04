@@ -4,7 +4,7 @@ import time
 import os
 
 from fb_scrapper import scrape_groups_pages
-from aws_s3 import init_s3
+
 exitFlag = 0
 
 class scrapeThread (threading.Thread):
@@ -94,6 +94,7 @@ for t in threads:
 print ("Exiting Main Thread")
 
 if os.environ["USE_AWS"] is "1":
+    from aws_s3 import init_s3
     init_s3()
     print("files saved to AWS2")
 # Add other connectors
