@@ -231,3 +231,5 @@ class FB_SCRAPE(object):
                 (num_processed, datetime.datetime.now() - scrape_starttime))
     def scrapeComments(self):
         scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp, self.sesh)
+    def connect_to_SQL(self):
+        print("")
