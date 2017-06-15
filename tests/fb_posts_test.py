@@ -54,7 +54,7 @@ class MyTest(unittest.TestCase):
         access = os.environ['FB_ID'] + "|"  + os.environ['FB_KEY']
         status_id = "115285708497149_1700908723268165"
         print(a.getReactionsForStatus(status_id, access))
-        self.assertEquals(a.getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 7}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
+        self.assertEqual(a.getReactionsForStatus(status_id,access),{'angry': {'data': [], 'summary': {'total_count': 0}}, 'haha': {'data': [], 'summary': {'total_count': 0}}, 'id': '115285708497149_1700908723268165','like': {'data': [], 'summary': {'total_count': 7}},'love': {'data': [], 'summary': {'total_count': 0}}, 'sad': {'data': [], 'summary': {'total_count': 0}},'wow': {'data': [], 'summary': {'total_count': 1}}})
     def test_getFacebookCommentFeedData(self):
         access_token = os.environ['FB_ID'] + "|" + os.environ['FB_KEY']
         print(getFacebookCommentFeedData("176485839144245_1128860933906726", access_token, 100, -2180131200))
