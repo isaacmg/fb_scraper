@@ -1,4 +1,4 @@
-import pony
+import pony.orm import *
 import os
 db = pony.Database("postgres", user=os.environ['pg_user'], password=os.environ['pg_password'], host=os.environ['pg_host'], database=os.environ['pg_db'])
 class Record(db.Entity):
