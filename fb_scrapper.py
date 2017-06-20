@@ -1,6 +1,7 @@
 import shelve
 from fb_posts import FB_SCRAPE
-
+from pg_db import Job
+import psycopg2
 import time
 import os
 
@@ -63,6 +64,10 @@ def scrape(page_id,tstamp, useKafka, useES):
     scraper.scrapeFacebookPageFeedStatus2( page_id, access_token, pageStamp)
     if os.environ.get("COMMENTS") is not None:
         scraper.scrapeComments()
+# Function to save results into table
+def save_scrape_PS(conn, endTime, lastPostID, numberScraped):
+    return "results saved"
+
 
 
 

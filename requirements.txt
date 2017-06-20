@@ -5,3 +5,4 @@ coverage
 elasticsearch
 requests_aws4auth
 psycopg2
+pony
