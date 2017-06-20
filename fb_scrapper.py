@@ -1,6 +1,6 @@
 import shelve
 from fb_posts import FB_SCRAPE
-from pg_db import Record 
+from pg_db import save_scrape_PS
 import psycopg2
 import time
 import os
@@ -35,6 +35,7 @@ def get_tstamp(page_id, tstamp ,path):
 # Save the time the last time page was scraped
 def save_shelve(page_id, path):
     timestamp = int(time.time())
+    save_scrape_PS(page_id,timestamp, 30, 1230313)
     d = shelve.open(path)
     d[page_id] = timestamp
     d.close()
@@ -64,8 +65,11 @@ def scrape(page_id,tstamp, useKafka, useES):
     scraper.scrapeFacebookPageFeedStatus2( page_id, access_token, pageStamp)
     if os.environ.get("COMMENTS") is not None:
         scraper.scrapeComments()
+
 # Function to save results into table
-def save_scrape_PS(conn, endTime, lastPostID, numberScraped):
+
+
+
     return "results saved"
 
 
