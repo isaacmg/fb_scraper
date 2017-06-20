@@ -35,7 +35,7 @@ def get_tstamp(page_id, tstamp ,path):
 # Save the time the last time page was scraped
 def save_shelve(page_id, path):
     timestamp = int(time.time())
-    save_scrape_PS(page_id,timestamp, 30, 1230313)
+    save_scrape_PS(page_id,timestamp, 123031, 30)
     d = shelve.open(path)
     d[page_id] = timestamp
     d.close()
