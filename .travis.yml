@@ -2,9 +2,10 @@ language: python
 python:
   - "3.5"
 cache: pip
+group: edge
 services:
   - docker
-  
+
 install:
   - pip install -r requirements.txt
   - chmod +x $TRAVIS_BUILD_DIR/build_kafk.sh
