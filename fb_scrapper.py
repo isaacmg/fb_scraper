@@ -1,6 +1,6 @@
 import shelve
 from fb_posts import FB_SCRAPE
-from pg_db import Job
+from pg_db import Record 
 import psycopg2
 import time
 import os
