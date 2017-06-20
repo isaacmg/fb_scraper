@@ -11,6 +11,6 @@ class Record(db.Entity):
 db.generate_mapping(create_tables=True)
 
 @db_session
-def save_scrape_PS(startTime, numberScraped, group):
+def save_scrape_PS(startTime, endTime, numberScraped, group):
     timestamp = int(time.time())
     Record(group_name = group, unix_tstamp=timestamp, end_tstamp=startTime, posts_scraped=numberScraped)
