@@ -15,4 +15,4 @@ def save_scrape_PS( group, startTime, endTime, numberScraped):
     Record(group_name = group, unix_tstamp=startTime, end_tstamp=startTime, posts_scraped=numberScraped)
 #TODO query DB to get timestamp
 def get_time(group):
-    return 1
+    return max(s.unix_tstamp for s in Record if s.group_name == group)
