@@ -10,6 +10,7 @@ from fb_posts_realtime import serialize, get_as_json, init_kafka
 from kafka_test import deserialize
 from run_es import init_es
 from threaded_proc import get_scrape_type, load_id_file
+from pg_db import save_scrape_PS, get_time
 
 
 
@@ -102,6 +103,14 @@ class MyTest(unittest.TestCase):
         self.assertEqual(load_id_file("junk_path"),['paddlesoft','115285708497149'])
     def test_get_scrape_type(self):
         self.assertEqual(get_scrape_type(),(1,False,False))
+    def test_ps_save(self):
+        timestamp = int(time.time())
+        save_scrape_PS("whacky_paddle",timestamp,timestamp, 5)
+        self.assertEqual(1,1)
+    def test_get_time(self):
+        self.assertTrue(100 < get_time("whacky_paddle"))
+
+
 
 
 
