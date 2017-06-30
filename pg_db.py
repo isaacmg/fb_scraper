@@ -14,5 +14,6 @@ db.generate_mapping(create_tables=True)
 def save_scrape_PS( group, startTime, endTime, numberScraped):
     Record(group_name = group, unix_tstamp=startTime, end_tstamp=startTime, posts_scraped=numberScraped)
 #TODO query DB to get timestamp
+@db_session
 def get_time(group):
     return max(s.unix_tstamp for s in Record if s.group_name == group)
