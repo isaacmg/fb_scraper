@@ -1,8 +1,7 @@
 from airflow import DAG
 from airflow.operators import BashOperator
 from datetime import datetime
-import os
-import sys
+
 
 args = {
   'owner': 'airflow'
