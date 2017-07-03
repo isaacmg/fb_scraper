@@ -95,6 +95,7 @@ class MyTest(unittest.TestCase):
         init_kafka("localhost:9092")
         # Kafka is running properly on Travis-CI if this doesn't fail
         self.assertEqual(1,1)
+
     def test_run_es(self):
         init_es()
         # TODO IMPLEMENT object comparision test
