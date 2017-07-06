@@ -233,4 +233,4 @@ class FB_SCRAPE(object):
     def scrapeComments(self):
         scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp, self.sesh)
     def connect_to_SQL(self):
-        print("")
+        print("record saved to database")

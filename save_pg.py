@@ -4,14 +4,17 @@ db = Database("postgres", user=os.environ['pg_user'], password=os.environ['pg_pa
 class Post(db.Entity):
     id = PrimaryKey(int, auto=True)
     group_name = Required(str)
-    text = Required(str)
-    unix_tstamp = Required(int, size=64)
-    posts_scraped = Required(int)
-    end_tstamp = Required(int,size=64)
+    text = Required(LongStr)
+    status_id = Required(str)
+    person_name = Required(str)
+    comments = Required(int)
+    num_reactions = Required(int)
+    num_comments = Required(int)
+
 
 db.generate_mapping(create_tables=True)
 
 @db_session
-#TODO IMPLEMENT 
-def save_post_pg( group, text, author, time, likes):
-    Post(group_name = group, unix_tstamp=startTime, end_tstamp=startTime, posts_scraped=numberScraped)
+# TODO IMPLEMENT
+def save_post_pg(group, status_name, text, reactions, num_comments, num_reactions, likes, name):
+    Post(group_name = group, text=text, num_reactions=reactions, num_comments=num_comments, person_name=name)
