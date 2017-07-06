@@ -11,6 +11,7 @@ from kafka_test import deserialize
 from run_es import init_es
 from threaded_proc import get_scrape_type, load_id_file
 from pg_db import save_scrape_PS, get_time
+from save_pg import save_post_pg
 
 
 
@@ -110,6 +111,11 @@ class MyTest(unittest.TestCase):
         self.assertEqual(1,1)
     def test_get_time(self):
         self.assertTrue(100 < get_time("whacky_paddle"))
+    def add_db_post(self):
+        save_post_pg("paddlesoft", "dwqwwijq2122", "here is some text about facebook", 2, 10, 2, "me")
+        # Write query to compare
+        self.assertEqual(1,1)
+
 
 
 
