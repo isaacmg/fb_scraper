@@ -1,7 +1,6 @@
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 import os
-import json
 def init_es():
     host = os.environ['ES_HOST']
     if os.environ['ES_USE_AWS'] is "1":

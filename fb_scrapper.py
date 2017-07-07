@@ -1,7 +1,6 @@
 import shelve
 from fb_posts import FB_SCRAPE
 from pg_db import save_scrape_PS
-import psycopg2
 import time
 import os
 
