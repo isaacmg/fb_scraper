@@ -8,6 +8,7 @@ from time import gmtime, strftime
 from fb_posts_realtime import init_kafka, send_message
 from fb_comments_page import scrapeFacebookPageFeedComments
 from run_es import init_es, index_res
+from save_pg import save_post_pg
 class FB_SCRAPE(object):
     def __init__(self, useKafka, useES, useSQL, outputJSON):
         self.producer = None
@@ -232,5 +233,6 @@ class FB_SCRAPE(object):
             return(num_processed)
     def scrapeComments(self):
         scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp, self.sesh)
-    def connect_to_SQL(self):
-        print("record saved to database")
+    def connect_to_SQL(self, group, status_name, message, reactions, comments, likes, name):
+        save_post_pg(group, status_name, message, reactions, comments, likes, name)
+        
