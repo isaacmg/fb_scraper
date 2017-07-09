@@ -5,7 +5,7 @@ import shelve
 import time
 from fb_scrapper import save_shelve,  get_tstamp, get_access, scrape_groups_pages
 from fb_posts import FB_SCRAPE
-from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
+#from fb_comments_page import getFacebookCommentFeedData, request_until_succeed, processFacebookComment
 from fb_posts_realtime import serialize, get_as_json, init_kafka
 from kafka_test import deserialize
 from run_es import init_es

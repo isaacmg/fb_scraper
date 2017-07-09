@@ -15,5 +15,5 @@ db.generate_mapping(create_tables=True)
 
 @db_session
 def save_post_pg(group, status_name, message, reactions, comments, likes, name):
-    print("saving result to db")
+    print("result saved to the database")
     Posts(group_name = group, status_id=status_name, text=message,  num_reactions=reactions,  num_comments=num_comments, num_likes=likes,  person_name=name)
