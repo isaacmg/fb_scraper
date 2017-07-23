@@ -1,6 +1,6 @@
 from pony.orm import *
 import os
-db = Database("postgres", user=os.environ['pg_user'], password=os.environ['pg_password'], host=os.environ['pg_host'], database=os.environ['pg_db'])
+db = Database(os.environ['db'], user=os.environ['pg_user'], password=os.environ['pg_password'], host=os.environ['pg_host'], database=os.environ['pg_db'])
 class Posts(db.Entity):
     id = PrimaryKey(int, auto=True)
     group_name = Required(str)
@@ -12,7 +12,7 @@ class Posts(db.Entity):
     num_likes = Required(int)
 
 db.generate_mapping(create_tables=True)
-
+# Save the result to SQL database of your choosing
 @db_session
 def save_post_pg(group, status_name, message, reactions, comments, likes, name):
     Posts(group_name = group, status_id=status_name, text=message,  num_reactions=reactions,  num_comments=comments, num_likes=likes,  person_name=name)

@@ -235,4 +235,3 @@ class FB_SCRAPE(object):
         scrapeFacebookPageFeedComments(self.file_id,self.access_token,self.tstamp, self.sesh)
     def connect_to_SQL(self, group, status_name, message, reactions, comments, likes, name):
         save_post_pg(group, status_name, message, reactions, comments, likes, name)
-        
