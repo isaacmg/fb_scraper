@@ -17,7 +17,7 @@ The goal of this project is to implement a Facebook scraping and extraction engi
 
 To get the ID of a Facebook group go [here](https://lookup-id.com) and input the url of the group you are trying to scrape. Pages you can just use after the slash (i.e. http://facebook.com/paddlesoft would be paddlesoft).
 ### Docker
-We reccomend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above.
+We recomend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above.
 
 ### Running Locally
 
@@ -40,7 +40,7 @@ scrape_comments_from_last_scrape(group_id)
 
 6. There are some other use case examples on my main GitHub page which you can look at as well. However, I have omitted them from this repo since they are mainly in Java and require Apache Flink.
 
-7. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder. It is reccomended that you use the dags in conjunction with our Docker image. This will avoid directory errors.
+7. We are also working on automating scraping with Apache Airflow. The dags we have created so far are in the dags folder. It is recomended that you use the dags in conjunction with our Docker image. This will avoid directory errors.
 
 
 ### Scrape away!
