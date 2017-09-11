@@ -30,14 +30,14 @@ class MyTest(unittest.TestCase):
         timestamp = int(time.time())
         save_scrape_PS("13142345",timestamp,timestamp, 5)
         self.assertEqual(test_func("13142345",d), 1)
-        # remove shelve 
+        # remove shelve
     def test_tstamp(self):
         self.assertEqual(get_tstamp("13142345", 0,"test"),-2180131200)
     def test_tstamp2(self):
         timestamp = int(time.time())
         d = shelve.open("test")
         d["13142345"] = timestamp
-        self.assertEqual(get_tstamp("13142345", 1,"test"), str(timestamp))
+        self.assertEqual(get_tstamp("13142345", 1,"test"), timestamp)
     def test_access_t(self):
         self.assertEqual(get_access('data/files/text.txt'),"999999999|awerqwerdummytext")
     def test_getFacebookPageFeedData(self):
