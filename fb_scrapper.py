@@ -15,15 +15,6 @@ def scrape_groups_pages(page_id, from_time, useKafka, useES):
 def get_tstamp(page_id, tstamp ,path):
     if tstamp is 1:
         pageStamp = get_time(page_id)
-        with shelve.open(path) as d:
-            if page_id in d:
-                time_opened = d[page_id]
-                pageStamp = str(time_opened)
-                print("Scraping since unix time " + pageStamp)
-            else:
-                print("key not found in dict proceeding with full scrape")
-                pageStamp = -2180131200
-
     elif tstamp is 0:
         pageStamp = -2180131200
     else:
