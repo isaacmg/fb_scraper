@@ -27,6 +27,8 @@ class MyTest(unittest.TestCase):
     def test_save_shelve(self):
         save_shelve("13142345","test")
         d = shelve.open('test')
+        timestamp = int(time.time())
+        save_scrape_PS("13142345",timestamp,timestamp, 5)
         self.assertEqual(test_func("13142345",d), 1)
     def test_tstamp(self):
         self.assertEqual(get_tstamp("13142345", 0,"test"),-2180131200)

@@ -1,14 +1,12 @@
 import shelve
 from fb_posts import FB_SCRAPE
-from pg_db import save_scrape_PS
+from pg_db import save_scrape_PS, get_time
 import time
 import os
 
 #import fb_pages
 # Function to scrape with.
 # Call with group id and whether you want to scrape all the way back 0 or since last scrape 1.
-# To do: allow passing of an array of groups, allow passing of a custom scrape date, add functions for scraping of pages
-# To do create unit tests to make sure it runs.
 def scrape_groups_pages(page_id, from_time, useKafka, useES):
     scrape(page_id, from_time, useKafka, useES)
     return "Sucessfully scraped from " + str(from_time) + "for page id " + str(page_id)
@@ -16,6 +14,7 @@ def scrape_groups_pages(page_id, from_time, useKafka, useES):
 # Get to time scrape from
 def get_tstamp(page_id, tstamp ,path):
     if tstamp is 1:
+        pageStamp = get_time(page_id)
         with shelve.open(path) as d:
             if page_id in d:
                 time_opened = d[page_id]
@@ -64,12 +63,8 @@ def scrape(page_id,tstamp, useKafka, useES):
     scraper.scrapeFacebookPageFeedStatus2(page_id, access_token, pageStamp)
     if os.environ.get("COMMENTS") is not None:
         scraper.scrapeComments()
-
-# Function to save results into table
-
-
-
     return "results saved"
+
 
 
 
