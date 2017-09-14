@@ -16,8 +16,11 @@ The goal of this project is to implement a Facebook scraping and extraction engi
 ## Instructions
 
 To get the ID of a Facebook group go [here](https://lookup-id.com) and input the url of the group you are trying to scrape. Pages you can just use after the slash (i.e. http://facebook.com/paddlesoft would be paddlesoft).
+
+### Update we have switched to using a DB for recording information. Please see documentation for revised instructions. 
+
 ### Docker
-We recomend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above.
+We recomend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above. 
 
 ### Running Locally
 
@@ -32,7 +35,7 @@ group_id = "115285708497149"
 scrape_posts_from_last_scrape(group_id)
 scrape_comments_from_last_scrape(group_id)
 ```
-3. Note that our messaging system using Kafka currently only works with the basic json data (comparable to the CSV). We our working on addeding a new schema for the more complex data [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11).  Plans to upgrade to add authentication for Kafka authentication are in progress.
+3. Note that our messaging system using Kafka currently only works with the basic json data (comparable to the CSV). We are working on addeding a new schema for the more complex data [see issue 11](https://github.com/isaacmg/fb_scraper/issues/11).  Plans to upgrade to add authentication for Kafka authentication are in progress.
 
 4. Currently the majority of examples of actual analysis are contained in the Examining data using Spark.ipynb notebook located in the data folder. You can open the notebook and specify the name of your CSV.
 
