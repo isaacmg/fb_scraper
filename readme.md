@@ -20,7 +20,7 @@ To get the ID of a Facebook group go [here](https://lookup-id.com) and input the
 ### Update we have switched to using a DB for recording information. Please see documentation for revised instructions. 
 
 ### Docker
-We recomend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above. 
+We recommend you use our Docker images as it contains everything you need. For instructions on how to use our Dockerfile please see the [wiki page](https://github.com/isaacmg/fb_scraper/wiki/Docker-Image). Our Dockerfile is tested regularly on Codefresh so you can easily see if the build is passing above. 
 
 ### Running Locally
 
